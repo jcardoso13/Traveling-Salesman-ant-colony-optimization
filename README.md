@@ -3,6 +3,12 @@ Traveling salesman ant colony optimization using Java for Object Oriented Progra
 
 
 Group:
+
+
 João Cardoso, 84096
+
+
 Matilde Moreira, 84137
+
+
 Carolina Cunha, 79656
