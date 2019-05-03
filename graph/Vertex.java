@@ -17,6 +17,16 @@ public class Vertex<T,E>{
 		this.e.add(e);
 	}
 	
+	
+	
+	public T getLabel() {
+		return  label;
+	}
+
+	public ArrayList<Edge<T, E>> getE() {
+		return e;
+	}
+
 	void removeE(T label)
 	{
 		this.e.remove(label);

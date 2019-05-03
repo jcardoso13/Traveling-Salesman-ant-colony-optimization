@@ -22,7 +22,12 @@ public class Test {
 		if(b==true)
 			System.out.println(Gr.toString());
 		else System.out.println("Fail");
-		//if (b==true)
+		Vertex<String,Double> v=Gr.GetVertex(0);
+		Edge<String,Double> e=v.getE().get(0);
+		String label= e.getLabel();
+		Double weight= e.getWeight();
+		System.out.println("Sucess:"+ label + weight);
+				//if (b==true)
 			//System.out.println("it worked:");
 		//else System.out.println("fail");
 	}
