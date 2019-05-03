@@ -7,13 +7,23 @@ public class graph<T,E>{
 	
 	private ArrayList<Vertex<T,E>> g;
 	
+	public ArrayList<Vertex<T, E>> getG() {
+		return g;
+	}
+
+
+	public Vertex<T,E> GetVertex(int position) {
+		return g.get(position);
+	}
+
+
 	public graph() {
 		this.g = new ArrayList<Vertex<T,E>>();
 	}
 	
 	
 	// if success return true, else fail
-	boolean addVertex(T label) {
+	public boolean addVertex(T label) {
 	Vertex<T,E> v= new Vertex<T,E>(label);
 	if (this.g.contains(v)==false)
 	{
@@ -23,13 +33,13 @@ public class graph<T,E>{
 	return false;
 	}
 	//return true if success, else fail
-	boolean removeVertex(T label) {
+	public boolean removeVertex(T label) {
 		Vertex<T,E> v= new Vertex<T,E>(label);
 		boolean b=this.g.remove(v);
 		return b;
 	}
 	
-	boolean addE(T label1,T label2, E weight) {
+	public boolean addE(T label1,T label2, E weight) {
 		Vertex<T,E> v1= new Vertex<T,E>(label1);
 		Vertex<T,E> v2= new Vertex<T,E>(label2);
 		
@@ -49,7 +59,7 @@ public class graph<T,E>{
 		else return false;
 	}
 	
-	boolean removeE(T label1,T label2) {
+	public boolean removeE(T label1,T label2) {
 		Vertex<T,E> v1= new Vertex<T,E>(label1);
 		Vertex<T,E> v2= new Vertex<T,E>(label2);
 		
@@ -80,18 +90,21 @@ public class graph<T,E>{
 		{
 			while(it.hasNext())
 			{
-				n++;
 				f=it.next().equals(v);
 				if (f==true)
 				{
 				return n;
 				}
+				n++;
 			}
 			return -1;
 		}
 		return 0;
 	}
 	
+	public String toString() {
+		return this.g.toString(); 
+	}
 	// getters and setters
 }
 	

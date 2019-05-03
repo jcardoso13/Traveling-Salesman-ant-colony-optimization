@@ -10,4 +10,8 @@ public class Edge<T,E>{
 		this.label=label;
 		this.weight=weight;
 	}
+	
+	public String toString() {
+		return "\nLabel:"+ this.label + " Weight:"+ this.weight+"\n"; 
+	}
 }

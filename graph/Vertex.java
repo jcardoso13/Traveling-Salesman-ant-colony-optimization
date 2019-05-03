@@ -22,6 +22,10 @@ public class Vertex<T,E>{
 		this.e.remove(label);
 	}
 	
+	public String toString() {
+		return "\n Node name:" + this.label + " \n Edges: \n" + this.e.toString() + "\n"; 
+	}
+	
 
 	@Override
 	public int hashCode() {
