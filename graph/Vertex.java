@@ -23,7 +23,7 @@ public class Vertex<T,E>{
 	}
 	
 	public String toString() {
-		return "\n Node name:" + this.label + " \n Edges: \n" + this.e.toString() + "\n"; 
+		return "\n Label:" + this.label + " \n Edges: \n" + this.e.toString() + "\n"; 
 	}
 	
 
