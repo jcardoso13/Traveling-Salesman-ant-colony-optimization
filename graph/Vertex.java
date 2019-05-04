@@ -18,25 +18,33 @@ public class Vertex<T,E>{
 	}
 	
 	
-	
+	// Getter do Nome da Node, (diferente da posição no vetor!)
 	public T getLabel() {
 		return  label;
 	}
 
+	
+	//Getter do Array de Arestas, Para o trabalho, itera-se de 1 a N sendo N o numero de arestas
+	// Para referencia, ler sobre Iteradores (ou ver o código de GetV em graph.java)
 	public ArrayList<Edge<T, E>> getE() {
 		return e;
 	}
 
+	// Retira uma Edge da Node, não é preciso usar para o projeto
 	void removeE(T label)
 	{
 		this.e.remove(label);
 	}
 	
+	
+	// Para Println
 	public String toString() {
 		return "\n Label:" + this.label + " \n Edges: \n" + this.e.toString() + "\n"; 
 	}
 	
 
+	/* O seguinte código da hascode e equals é para o GetV, por isso ignora */
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
