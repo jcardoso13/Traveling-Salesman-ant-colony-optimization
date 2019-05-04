@@ -30,7 +30,7 @@ public class Test {
 		
 		
 		//TEST VERTEX AND EDGE GETTERS
-		Vertex<String,Double> v=Gr.GetVertex(0);
+		Vertex<String,Double> v=Gr.GetVertex("João");
 		Edge<String,Double> e=v.getE().get(0);
 		String label= e.getLabel();
 		Double weight= e.getWeight();

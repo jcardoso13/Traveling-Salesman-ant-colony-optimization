@@ -3,7 +3,7 @@ package graph;
 
 import java.util.*;
 
-public class graph<T,E>{
+public class graph<T,E> implements GraphInterface<T,E>{
 	
 	private ArrayList<Vertex<T,E>> g;
 	
@@ -14,8 +14,19 @@ public class graph<T,E>{
 	}
 
 	//Getter do Node na posição *Position* do vetor
-	public Vertex<T,E> GetVertex(int position) {
-		return g.get(position);
+	public Vertex<T,E> GetVertex(T label) {
+		int x;
+		Vertex<T,E> v1= new Vertex<T,E>(label);
+		x= this.getV(v1);
+		return g.get(x);
+	}
+	
+	public ArrayList<Edge<T,E>>GetEdgeVector(T label){
+		int x;
+		Vertex<T,E> v1= new Vertex<T,E>(label);
+		x= this.getV(v1);
+		return g.get(x).getE();
+		
 	}
 
 	// Cria o grafo com um List Array Vazio
