@@ -108,7 +108,10 @@ public class graph<T,E> implements GraphInterface<T,E>{
 	{
 		Iterator<Vertex<T,E>> it=this.g.iterator();
 		int n=0;
-		boolean f= this.g.get(0).equals(v); // Se a posição 0 do vetor é igual ao input
+		boolean f;
+		if (!g.isEmpty())
+		f= this.g.get(0).equals(v);
+		else return -1;						// Se a posição 0 do vetor é igual ao input
 											// Retorna 0, se não continua a procurar
 		if (f==false)
 		{

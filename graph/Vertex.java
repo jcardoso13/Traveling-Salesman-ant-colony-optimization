@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Vertex<T,E>{
 
+
 	private T label;
 	private ArrayList<Edge<T,E>> e;
 	public Vertex(T label) {
