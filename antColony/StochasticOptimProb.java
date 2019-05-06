@@ -122,6 +122,8 @@ public class StochasticOptimProb implements OptProblem {
 			getPec().addElement(new EventControlPrints(ctrl_time*j), Event.ec);
 		}
 		this.simulacao();
+		System.out.println(hamcycle);
+		//System.out.println(Gr);
 
 	}
 	

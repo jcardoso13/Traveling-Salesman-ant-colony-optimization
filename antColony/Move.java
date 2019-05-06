@@ -36,6 +36,12 @@ public class Move extends Event {
 		int hcCompleto = 0, aux1=0 ,aux2=0;
 		double pheromones_update,tempo_percurso=0;
 		HCResults hcr;
+		Integer label;
+		int n=0;
+		Integer w;
+		Edge<Integer,Integer> Ed;
+		Iterator<Edge<Integer,Integer>> ed;
+		Iterator<HCResults> iterH;
 		
 		StochasticOptimProb op = (StochasticOptimProb) opp;
 		Ant ant = this.getAnt(); 
@@ -51,13 +57,37 @@ public class Move extends Event {
 		
 		if (hcCompleto == 1)
 		{
-			System.out.println("Finished HC");
-			System.out.println("Dentro = "+ ant);
+			ed=gr.GetVertex(ant.path.peekLast()).getE().iterator();
+			while(ed.hasNext())
+			{
+				Ed=ed.next();
+				label=Ed.getLabel();
+				if(label==op.getNestnode())
+				{
+					w=Ed.getWeight();
+					ant.getCost().add(w);
+					ant.getPath().add(op.getNestnode());
+				}
+				
+			}
+		//	System.out.println("Finished HC");
+			//System.out.println("Dentro = "+ ant);
 			hcr = new HCResults(ant.getPath(),hC.calculate_cost(ant.getCost()));
-			op.hamcycle.add(hcr);
-			pheromones_update = Event.expRandom(op.getPlevel()*op.getwTotal()/hcr.costTotal);
+			iterH=op.hamcycle.iterator();
+			while(iterH.hasNext())
+			{
+			if(iterH.next().equals(hcr))
+				n=1;
+			}
 			
-			Iterator<Integer> iter = hcr.path.iterator();
+			if(n==0)
+			{
+				op.hamcycle.add(hcr);
+			}
+			else System.out.println("HELLO");
+			pheromones_update = Event.expRandom(op.getPlevel()*op.getwTotal()/hcr.costTotal);
+			//System.out.println(ant);
+			Iterator<Integer> iter = ant.getPath().iterator();
 			
 			while(iter.hasNext())
 			{
@@ -65,8 +95,8 @@ public class Move extends Event {
 				if(iter.hasNext())
 				{
 					aux2 = iter.next();
-					gr.FindE(aux1, aux2).setPheromones(gr.FindE(aux1,aux2).getPheromones()- pheromones_update);
-					gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()-pheromones_update);
+					gr.FindE(aux1, aux2).setPheromones(gr.FindE(aux1,aux2).getPheromones()+ pheromones_update);
+					gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()+pheromones_update);
 					op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
 				}
 			}
