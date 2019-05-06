@@ -82,21 +82,27 @@ public class StochasticOptimProb implements OptProblem {
 		{
 			ev = this.getPec().getFirstElement(); // passa para o proximo evento do PEC
 			//System.out.println(ev);
-			this.setActual_time(ev.getTime()); // Avanco rapido ate a hora de executa-lo
-			if (ev.getClass() == Move.class)
+			
+			while (ev != null)
 			{
-				this.set_mevent(this.get_mevent()+1);
-				//System.out.println();
-				//System.out.println("mmevent = " + mevent);
-				
+				this.setActual_time(ev.getTime()); // Avanco rapido ate a hora de executa-lo
+				if (ev.getClass() == Move.class)
+				{
+					this.set_mevent(this.get_mevent()+1);
+					//System.out.println();
+					//System.out.println("mmevent = " + mevent);
+					
+				}
+				else if (ev.getClass() == Evaporation.class)
+				{
+					this.set_eevent(this.get_eevent()+1);
+					//System.out.println();
+					//System.out.println("eevent = "+ eevent);
+				}
+				ev.ExecutaEvent(this,this.Gr,hC);	
+				ev = this.getPec().getFirstElement();
 			}
-			else if (ev.getClass() == Evaporation.class)
-			{
-				this.set_eevent(this.get_eevent()+1);
-				//System.out.println();
-				//System.out.println("eevent = "+ eevent);
-			}
-			ev.ExecutaEvent(this,this.Gr,hC);
+
 		}
 		
 	}

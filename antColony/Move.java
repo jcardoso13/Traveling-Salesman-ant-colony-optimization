@@ -57,6 +57,7 @@ public class Move extends Event {
 		
 		if (hcCompleto == 1)
 		{
+			//System.out.println("OLA");
 			ed=gr.GetVertex(ant.p.peekLast().getPath()).getE().iterator();
 			while(ed.hasNext())
 			{
@@ -92,10 +93,13 @@ public class Move extends Event {
 				aux1 = iter.next().getPath();
 				if(iter.hasNext())
 				{
+					
 					aux2 = iter.next().getPath();
+					if(gr.FindE(aux1,aux2).getPheromones()==0)
+						op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
+					
 					gr.FindE(aux1, aux2).setPheromones(gr.FindE(aux1,aux2).getPheromones()+ pheromones_update);
 					gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()+pheromones_update);
-					op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
 				}
 			}
 			

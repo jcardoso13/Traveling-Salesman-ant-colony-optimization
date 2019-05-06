@@ -37,10 +37,12 @@ public class Evaporation extends Event{
 		double aux2=0;
 		Edge<Integer,Integer> aux1;
 		Iterator<Vertex<Integer,Integer>> iter2 = gr.getG().iterator();
+		Vertex<Integer,Integer> a;
 		Iterator <Edge<Integer,Integer>> iter;
 		while (iter2.hasNext())
 		{
-			iter = iter2.next().getE().iterator();
+			a= iter2.next();
+			iter=a.getE().iterator();
 			while(iter.hasNext())
 			{
 				aux1 = iter.next();
@@ -52,13 +54,30 @@ public class Evaporation extends Event{
 				}
 				else 
 				{
-					aux1.setPheromones(aux2);
-					op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
+					if(!aux1.getEvap())
+					{
+						aux1.setPheromones(aux2);
+						aux1.setEvap(true);
+						aux1=gr.FindE(aux1.getLabel(),a.getLabel());
+						aux1.setPheromones(aux2);
+						aux1.setEvap(true);
+						op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
+					}
 				}
 			}			
 		}
-
-		op.getPec().addElement(new Evaporation(getTime()+ expRandom(op.getEtha()),null,op.getRho()), ec);
+		iter2 = gr.getG().iterator();
+		
+		while (iter2.hasNext())
+		{
+			iter=iter2.next().getE().iterator();
+			while(iter.hasNext())
+			{
+				iter.next().setEvap(false);
+			}
+		}
+		
+		//op.getPec().addElement(new Evaporation(getTime()+ expRandom(op.getEtha()),null,op.getRho()), Event.ec);
 	}
 	
 	/*****************************************************************************

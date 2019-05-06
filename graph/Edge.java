@@ -6,6 +6,7 @@ public class Edge<T,E>{
 	private T label;
 	private E weight;
 	private double pheromones;
+	private boolean evap;
 	
 	
 	public Edge(T label, E weight)
@@ -13,6 +14,7 @@ public class Edge<T,E>{
 		this.label=label;
 		this.weight=weight;
 		this.pheromones = 0;
+		this.evap=false;
 	}
 	
 	//Getter do Nome da Node que esta conectado a
@@ -38,5 +40,14 @@ public class Edge<T,E>{
 	public double getPheromones()
 	{
 		return pheromones;
+	}
+	
+	public boolean getEvap()
+	{
+		return evap;
+	}
+	public void setEvap(boolean b)
+	{
+		this.evap=b;
 	}
 }
