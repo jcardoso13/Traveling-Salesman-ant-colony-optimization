@@ -18,6 +18,7 @@ public class HCResults {
 	{
 		return "Path: " +path +"\n"+ "Cost:\n"+costTotal+ "\n";
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -26,6 +27,14 @@ public class HCResults {
 		result = prime * result + costTotal;
 		result = prime * result + ((path == null) ? 0 : path.hashCode());
 		return result;
+	}
+
+	public LinkedList<Integer> getPath() {
+		return path;
+	}
+
+	public int getCostTotal() {
+		return costTotal;
 	}
 
 	@Override

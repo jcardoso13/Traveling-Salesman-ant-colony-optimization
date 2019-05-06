@@ -44,6 +44,7 @@ public class EventControlPrints extends Event {
 	{
         String formato1 = "%-35s %-16f\n";
         String formato2 = "%-35s %-17d\n";
+        HCResults opt;
 
 		StochasticOptimProb op = (StochasticOptimProb) opP;
 		
@@ -58,7 +59,10 @@ public class EventControlPrints extends Event {
         System.out.println("\t\t");
         System.out.printf(formato2, "Number of evaporation events: ",op.get_eevent());
         System.out.println("\t\t");
-        System.out.print("Hamiltonian cycle: ");
+        opt=op.findOpt();
+        if(!opt.getPath().isEmpty())
+        System.out.print("Hamiltonian cycle: " + opt);
+        
         /**
          * falta o caminho ....
          */

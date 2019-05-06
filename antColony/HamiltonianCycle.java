@@ -64,12 +64,12 @@ public class HamiltonianCycle<T,E> {
 		double aux_double; 
 		double aux_accum = 0,aux_accum2 = 0;
 		boolean b;	
-		T obj; 
+		Integer obj; 
 		T next_label;
 		int next;
 		/* Iteradores */
 		Iterator<Edge<T,E>> it_e= Edges.iterator();
-		Iterator<T> it_list;
+		Iterator<pathw> it_list;
 		
 		if(!Edges.isEmpty()) 
 		{
@@ -103,8 +103,9 @@ public class HamiltonianCycle<T,E> {
 				prob.set(i,aux_accum2);	
 			}
 			next=random_decision(prob,n); /* retorna a escolha tomada */
-			path.add(available.get(next).getLabel()); /* adiciona a escolha no caminho */
-			weightTotal.add((Integer)weight.get(next));
+			//path.add(available.get(next).getLabel()); /* adiciona a escolha no caminho */
+			//weightTotal.add((Integer)weight.get(next));
+			ant.p.add(new pathw((Integer)available.get(next).getLabel(),(Integer)weight.get(next)));
 		}
 		else //se nao houver caminho nao visitados
 		{
@@ -116,17 +117,21 @@ public class HamiltonianCycle<T,E> {
 			}
 			next=random_decision(prob,j); /* retorna a escolha tomada */
 			next_label=Edges.get(next).getLabel(); // para saber a identificacao do node que vem a seguir
-			it_list=path.iterator(); 
+			it_list=ant.p.iterator(); 
+			//itw_list=weightTotal.iterator();
 			/* Ajustar o caminho  */
+			x=0;
 			while(it_list.hasNext())
 			{
-				obj=it_list.next();
+				obj=it_list.next().path;
+			//	itw_list.next();
 				if(obj.equals(next_label))
 				{
+					it_list.next();
 					while(it_list.hasNext())
 					{
-					path.remove(it_list.next());
-                    weightTotal.remove(x);
+					ant.p.remove(it_list.next());
+                   // weightTotal.remove(itw_list.next());
                     x++;
 					}
 					break;
@@ -136,8 +141,8 @@ public class HamiltonianCycle<T,E> {
 			
 		}
 
-		ant.setCost(weightTotal);
-		ant.setPath((LinkedList<Integer>)path);
+		//ant.setCost(weightTotal);
+		//ant.setPath((LinkedList<Integer>)path);
 		return ant;
 		 
 		 /*If node already visited= Eliminate the path after that node! */

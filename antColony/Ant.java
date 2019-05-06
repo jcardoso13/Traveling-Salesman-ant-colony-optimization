@@ -1,5 +1,6 @@
 package antColony;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 
@@ -17,18 +18,20 @@ import java.util.LinkedList;
 public class Ant {
 	
 	/* ===== ATRIBUTOS ===== */
-	LinkedList<Integer> path;
-	LinkedList<Integer> cost ;
+	//LinkedList<Integer> path;
+	//LinkedList<Integer> cost ;
+	LinkedList<pathw> p;
 	private boolean hit;
 	
 	/* ===== CONSTRUTOR ===== */
 	public Ant(int nest)
 	{
-		cost = new LinkedList<Integer>();
-		path = new LinkedList<Integer>();
+		pathw aux= new pathw(nest,0);
+		//cost = new LinkedList<Integer>();
+		//path = new LinkedList<Integer>();
+		p= new LinkedList<pathw>();
 		setHit(false);
-		path.add(nest); 
-		cost.add(0);
+		p.add(aux);
 	}
 	
 	
@@ -44,28 +47,62 @@ public class Ant {
 		return hit;
 	}
 	/** @param path -- armazena o caminho **/
-	public void setPath(LinkedList<Integer> p)
+	
+	public void setP(LinkedList<pathw> path)
+	{
+		p=path;
+	}
+	public LinkedList<pathw> getP()
+	{
+		return p;
+	}
+	
+	
+	public LinkedList<Integer> getPath()
+	{
+		Iterator<pathw> it= p.iterator();
+		LinkedList<Integer> n= new LinkedList<Integer>();
+		while(it.hasNext())
+		{
+			n.add(it.next().path);
+		}
+		return n;
+	}
+	public LinkedList<Integer> getCost()
+	{
+		Iterator<pathw> it= p.iterator();
+		LinkedList<Integer> n= new LinkedList<Integer>();
+		while(it.hasNext())
+		{
+			n.add(it.next().Cost);
+		}
+		return n;
+	}
+	
+	public String toString()
+	{
+		return p.toString();
+	}
+	/*    public void setPath(LinkedList<Integer> p)
 	{
 		path = p;
 	}
 	/** @return the path **/
-	public LinkedList<Integer> getPath()
+	/*public LinkedList<Integer> getPath()
 	{
 		return path;
 	}
 	/** @return the cost */
-	public LinkedList<Integer> getCost() 
+	/*public LinkedList<Integer> getCost() 
 	{
 		return cost;
 	}	
 	/** @param cost -- armazena o custo do caminho **/
-	public void setCost(LinkedList<Integer> c) 
+	/*public void setCost(LinkedList<Integer> c) 
 	{
 		cost = c;
 	}
-	public String toString() 
-	{
-		return "Path:\n " + path + "Costs:\n " + cost;
-	}	
+	
+	*/
 
 }

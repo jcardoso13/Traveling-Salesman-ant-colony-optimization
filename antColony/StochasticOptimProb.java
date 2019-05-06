@@ -122,7 +122,7 @@ public class StochasticOptimProb implements OptProblem {
 			getPec().addElement(new EventControlPrints(ctrl_time*j), Event.ec);
 		}
 		this.simulacao();
-		System.out.println(hamcycle);
+		//System.out.println(hamcycle);
 		//System.out.println(Gr);
 
 	}
@@ -353,6 +353,24 @@ public class StochasticOptimProb implements OptProblem {
 	public void setwTotal(int wT) 
 	{
 		wTotal = wT;
+	}
+	
+	public HCResults findOpt()
+	{
+	Iterator<HCResults> it= hamcycle.iterator();
+	HCResults aux;
+	HCResults ret= new HCResults(new LinkedList<Integer>(),0);
+	int Min=999999999;
+	while(it.hasNext())
+	{
+		aux=it.next();
+		if(Min>aux.getCostTotal())
+		{
+			ret=aux;
+			Min=aux.getCostTotal();
+		}
+	}
+	return ret;
 	}
 
 

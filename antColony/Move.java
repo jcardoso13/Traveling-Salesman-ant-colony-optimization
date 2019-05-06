@@ -47,9 +47,9 @@ public class Move extends Event {
 		Ant ant = this.getAnt(); 
 		//System.out.println(ant);
 		//System.out.println(ant.path.size() == op.getNbnodes());/* problema encontrado: o ciclo de hamiltion nunca termina */
-		for(Edge<Integer,Integer> iter : gr.GetEdgeVector(ant.path.peekLast()))
+		for(Edge<Integer,Integer> iter : gr.GetEdgeVector(ant.p.peekLast().getPath()))
 		{
-			if (ant.path.size() == op.getNbnodes() && iter.getLabel().equals(ant.path.peekFirst()))
+			if (ant.p.size() == op.getNbnodes() && iter.getLabel().equals(ant.p.peekFirst().getPath()))
 			{
 				hcCompleto = 1;
 			}
@@ -57,7 +57,7 @@ public class Move extends Event {
 		
 		if (hcCompleto == 1)
 		{
-			ed=gr.GetVertex(ant.path.peekLast()).getE().iterator();
+			ed=gr.GetVertex(ant.p.peekLast().getPath()).getE().iterator();
 			while(ed.hasNext())
 			{
 				Ed=ed.next();
@@ -65,8 +65,7 @@ public class Move extends Event {
 				if(label==op.getNestnode())
 				{
 					w=Ed.getWeight();
-					ant.getCost().add(w);
-					ant.getPath().add(op.getNestnode());
+					ant.p.add(new pathw(op.getNestnode(),w));
 				}
 				
 			}
@@ -83,18 +82,17 @@ public class Move extends Event {
 			if(n==0)
 			{
 				op.hamcycle.add(hcr);
+				//System.out.println(ant);
 			}
-			else System.out.println("HELLO");
 			pheromones_update = Event.expRandom(op.getPlevel()*op.getwTotal()/hcr.costTotal);
-			//System.out.println(ant);
-			Iterator<Integer> iter = ant.getPath().iterator();
+			Iterator<pathw> iter = ant.p.iterator();
 			
 			while(iter.hasNext())
 			{
-				aux1 = iter.next();
+				aux1 = iter.next().getPath();
 				if(iter.hasNext())
 				{
-					aux2 = iter.next();
+					aux2 = iter.next().getPath();
 					gr.FindE(aux1, aux2).setPheromones(gr.FindE(aux1,aux2).getPheromones()+ pheromones_update);
 					gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()+pheromones_update);
 					op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
@@ -102,10 +100,12 @@ public class Move extends Event {
 			}
 			
 			/* Apagou-se o caminho e o custo. Formigas voltam para o nestnode */
-			ant.path.clear();
+		/*	ant.path.clear();
 			ant.cost.clear();
 			ant.path.add(op.getNestnode());
-			ant.cost.add(0);
+			ant.cost.add(0);*/
+			ant.p.clear();
+			ant.p.add(new pathw(op.getNestnode(),0));
 			
 		}
 		/* */
