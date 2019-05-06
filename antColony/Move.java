@@ -52,6 +52,7 @@ public class Move extends Event {
 		if (hcCompleto == 1)
 		{
 			System.out.println("Finished HC");
+			System.out.println("Dentro = "+ ant);
 			hcr = new HCResults(ant.getPath(),hC.calculate_cost(ant.getCost()));
 			op.hamcycle.add(hcr);
 			pheromones_update = Event.expRandom(op.getPlevel()*op.getwTotal()/hcr.costTotal);

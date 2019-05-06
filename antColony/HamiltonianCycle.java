@@ -78,7 +78,7 @@ public class HamiltonianCycle<T,E> {
 			{
 				Edge<T,E> auxe=it_e.next();
 				Vertex<T,E> aux= new Vertex<T,E>(auxe.getLabel());
-				b=path.contains(aux);
+				b=path.contains(auxe.getLabel());
 				/* Se a aresta nao estiver no caminho ainda */
 				if (!b)
 				{
@@ -138,7 +138,6 @@ public class HamiltonianCycle<T,E> {
 
 		ant.setCost(weightTotal);
 		ant.setPath((LinkedList<Integer>)path);
-		//System.out.println("Dentro = "+ant);
 		return ant;
 		 
 		 /*If node already visited= Eliminate the path after that node! */
