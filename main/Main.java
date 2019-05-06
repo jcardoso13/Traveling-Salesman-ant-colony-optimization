@@ -9,7 +9,7 @@
  * 					Joao Pedro Cardoso, numero 84096
  * 					Carolina Cunha, numero 79656
  *
- * Ultima data modificacao: 04/05/2019
+ * Ultima data modificacao: 06/05/2019
  * Nome do Ficheiro: Main.java - classe usada para testar o programa
  **********************************************************************/
 package main;
@@ -19,14 +19,15 @@ import antColony.StochasticOptimProb;
 
 public class Main {
 
-	/****
+	/*************************************************************************
 	 * Main - metodo usado para testar o programa so precisa de um argumento
 	 * de entrada que corresponde ao xml com os parametros de entrada
 	 * 
-	 * @author grupo 11
+	 * @author Grupo 11
 	 * @param args - nome do ficheiro de teste a ser usado
-	 */
-	public static void main(String[] args) {
+	 *************************************************************************/
+	public static void main(String[] args) 
+	{
 		
 		/* 1 - Verifica se foi indicado algum argumento (i.e. ficheiro .xml) para alem da invocacao do programa */
 		if (args.length != 1) {

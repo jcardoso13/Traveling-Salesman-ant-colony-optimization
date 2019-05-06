@@ -138,6 +138,7 @@ public class HamiltonianCycle<T,E> {
 
 		ant.setCost(weightTotal);
 		ant.setPath((LinkedList<Integer>)path);
+		//System.out.println("Dentro = "+ant);
 		return ant;
 		 
 		 /*If node already visited= Eliminate the path after that node! */

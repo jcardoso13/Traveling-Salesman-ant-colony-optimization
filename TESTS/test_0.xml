@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE simulation SYSTEM "simulation.dtd">
 <simulation finalinst="300.0" antcolsize="200" plevel="0.5">
 	<graph nbnodes="5" nestnode="1">
 		<node nodeidx="1">
@@ -13,12 +11,11 @@
 			<weight targetnode="4">2</weight>
 			<weight targetnode="5">5</weight>
 		</node>
-		<node nodeidx="3"> 
-		</node>
+		<node nodeidx="3"> </node>
 		<node nodeidx="4">
 			<weight targetnode="5">1</weight>
 		</node>
-	</graph>	
+	</graph>
 	<events>
 		<move alpha="1.0" beta="1.0" delta="0.2"/>
 		<evaporation eta="2.0" rho="10.0"/>

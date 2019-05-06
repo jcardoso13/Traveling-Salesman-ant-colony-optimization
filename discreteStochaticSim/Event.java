@@ -74,9 +74,9 @@ public abstract class Event implements InterfaceEvent {
     	return time_stamp;
     }
     /** @param tempo ira ser armazenado **/
-    public void setTime(double time_stamp) 
+    public void setTime(double ts) 
     {
-    	this.time_stamp = time_stamp;
+    	time_stamp = ts;
     }
 
 

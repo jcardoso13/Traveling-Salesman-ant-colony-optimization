@@ -34,9 +34,9 @@ public class Ant {
 	
 	/* ===== METODOS ==== */
 	/** @param hit -- armazena o hit **/
-	public void setHit(boolean hit) 
+	public void setHit(boolean h) 
 	{
-		this.hit = hit;
+		hit = h;
 	}
 	/** @return hit **/
 	public boolean isHit()
@@ -44,9 +44,9 @@ public class Ant {
 		return hit;
 	}
 	/** @param path -- armazena o caminho **/
-	public void setPath(LinkedList<Integer> path)
+	public void setPath(LinkedList<Integer> p)
 	{
-		this.path = path;
+		path = p;
 	}
 	/** @return the path **/
 	public LinkedList<Integer> getPath()
@@ -59,10 +59,13 @@ public class Ant {
 		return cost;
 	}	
 	/** @param cost -- armazena o custo do caminho **/
-	public void setCost(LinkedList<Integer> cost) 
+	public void setCost(LinkedList<Integer> c) 
 	{
-		this.cost = cost;
+		cost = c;
 	}
-
+	public String toString() 
+	{
+		return "Path:\n " + path + "Costs:\n " + cost;
+	}	
 
 }

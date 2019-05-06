@@ -39,9 +39,8 @@ public class Move extends Event {
 		
 		StochasticOptimProb op = (StochasticOptimProb) opp;
 		Ant ant = this.getAnt(); 
-		
-		
-		
+		//System.out.println(ant);
+		//System.out.println(ant.path.size() == op.getNbnodes());/* problema encontrado: o ciclo de hamiltion nunca termina */
 		for(Edge<Integer,Integer> iter : gr.GetEdgeVector(ant.path.peekLast()))
 		{
 			if (ant.path.size() == op.getNbnodes() && iter.getLabel().equals(ant.path.peekFirst()))
@@ -52,6 +51,7 @@ public class Move extends Event {
 		
 		if (hcCompleto == 1)
 		{
+			System.out.println("Finished HC");
 			hcr = new HCResults(ant.getPath(),hC.calculate_cost(ant.getCost()));
 			op.hamcycle.add(hcr);
 			pheromones_update = Event.expRandom(op.getPlevel()*op.getwTotal()/hcr.costTotal);
@@ -61,10 +61,13 @@ public class Move extends Event {
 			while(iter.hasNext())
 			{
 				aux1 = iter.next();
-				aux2 = iter.next();
-				gr.FindE(aux1, aux2).setPheromones(gr.FindE(aux1,aux2).getPheromones()- pheromones_update);
-				gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()-pheromones_update);
-				op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),ec);
+				if(iter.hasNext())
+				{
+					aux2 = iter.next();
+					gr.FindE(aux1, aux2).setPheromones(gr.FindE(aux1,aux2).getPheromones()- pheromones_update);
+					gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()-pheromones_update);
+					op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
+				}
 			}
 			
 			/* Apagou-se o caminho e o custo. Formigas voltam para o nestnode */
@@ -73,14 +76,13 @@ public class Move extends Event {
 			ant.path.add(op.getNestnode());
 			ant.cost.add(0);
 			
-			/* */
-			tempo_percurso = Event.expRandom(op.getDelta());
-			ant = hC.GetNextMove(ant);
-			tempo_percurso = Event.expRandom(op.getDelta()*ant.getCost().getLast());
-			
-			op.getPec().addElement(new Move(getTime()+tempo_percurso,ant),ec);
 		}
+		/* */
+		tempo_percurso = Event.expRandom(op.getDelta());
+		ant = hC.GetNextMove(ant);
+		tempo_percurso = Event.expRandom(op.getDelta()*ant.getCost().getLast());
 		
+		op.getPec().addElement(new Move(getTime()+tempo_percurso,ant),Event.ec);
 		
 		
 	}
@@ -89,8 +91,7 @@ public class Move extends Event {
 	 * toString metodo que substitui aquele com o mesmo nome na superclasse Object.
 	 ****************************************************************************/
 	public String toString() {
-		return ("(Type:Move, Ant ID:"
-				+ ",Time:"
+		return ("(Type:Move, AntID:,Time"
 				+ this.getTime()
 				+ ")");
 	}

@@ -17,6 +17,7 @@ import discreteStochaticSim.InterfacePec;
 import discreteStochaticSim.PriorityQueuePec;
 import graph.graph;
 
+
 /**************************************************************************************************************
  *  Classe da Otimizacao do Problema
  *  E importante salientar que existem 4 atributos que nao sao estaticos:relacionados com o tempo, grafo, 
@@ -31,7 +32,7 @@ public class StochasticOptimProb implements OptProblem {
 	/* =========== ATRIBUTOS ============ */
 	
 	/*1.parametros relacionados com o tempo*/
-	private double ctrl_time ; 
+	private double ctrl_time; 
 	private double finalinst;
 	private double actual_time;
 	
@@ -41,7 +42,7 @@ public class StochasticOptimProb implements OptProblem {
 	private double delta;
 	private double eta;
 	private double rho;
-	private int numControlPrint = 1;
+	private int numControlPrint ;
 	private int mevent = 0 ;
 	private int eevent = 0;
 	private InterfacePec<Event> pec;
@@ -49,9 +50,10 @@ public class StochasticOptimProb implements OptProblem {
 	/*3.parametros relacionados com formiga*/
 	private final List<Ant> list_ants;
 	private double plevel;
-	private int antcolsize;
+	private int antcolsize,total;
 	LinkedList <HCResults> hamcycle = new LinkedList<HCResults>();
 	HamiltonianCycle<Integer,Integer> hC;
+	
 	/*4. parametros relacionados com o grafo*/
 	private graph<Integer,Integer> Gr = new graph<Integer,Integer>();
 	private int nbnodes;
@@ -73,27 +75,26 @@ public class StochasticOptimProb implements OptProblem {
 
 	
 	public void simulacao() {
+		
 		Event ev;
 		/* ========================= SIMULACAO ===========================*/
 		while (this.getActual_time()<this.finalinst)
 		{
 			ev = this.getPec().getFirstElement(); // passa para o proximo evento do PEC
+			//System.out.println(ev);
 			this.setActual_time(ev.getTime()); // Avanco rapido ate a hora de executa-lo
-			System.out.print(ev.getClass());
 			if (ev.getClass() == Move.class)
 			{
 				this.set_mevent(this.get_mevent()+1);
-				System.out.print("mevent = "+ mevent);
-				System.out.println();
-
+				//System.out.println();
+				//System.out.println("mmevent = " + mevent);
+				
 			}
 			else if (ev.getClass() == Evaporation.class)
 			{
 				this.set_eevent(this.get_eevent()+1);
-				System.out.println("eevent = "+ eevent);
-				System.out.println();
-
-
+				//System.out.println();
+				//System.out.println("eevent = "+ eevent);
 			}
 			ev.ExecutaEvent(this,this.Gr,hC);
 		}
@@ -106,17 +107,22 @@ public class StochasticOptimProb implements OptProblem {
 		hC = new HamiltonianCycle<Integer,Integer>(alpha,beta,Gr);
 		setActual_time(0);
 		ctrl_time = finalinst/20;
+		
+		
 		//Adiciona as impressoes do controlo de Evento ao PEC
-		Iterator<Ant> formigas = list_ants.iterator();
-		while (formigas.hasNext())
-		{		
-			//list_ants.set(0, new Ant(nestnode));
-			//System.out.println(list_ants.get(1).isHit());
-			//getPec().addElement(new Move(0,), Event.ec);			
+		for (int i = 0; i < antcolsize; i++)
+		{
+			Ant a = new Ant(nestnode);
+			getList_ants().add(a);
+			getPec().addElement(new Move(0,a),Event.ec);
+			
 		}
-		
-		
-		//this.simulacao();
+		for (int j = 0; j <= 20; j++ )
+		{
+			getPec().addElement(new EventControlPrints(ctrl_time*j), Event.ec);
+		}
+		this.simulacao();
+
 	}
 	
 	
@@ -158,8 +164,7 @@ public class StochasticOptimProb implements OptProblem {
     		}
     		element = (Element)graph;
     		setNbnodes(Integer.parseInt(element.getAttribute("nbnodes")));
-    		setNestnode(Integer.parseInt(element.getAttribute("nestnode"))-1);
-    		
+    		setNestnode(Integer.parseInt(element.getAttribute("nestnode")));
     		NodeList weightsNode;
     		Node node;
     		int nodeidx=0,weight,neigh=0;
@@ -218,11 +223,11 @@ public class StochasticOptimProb implements OptProblem {
     		ex.printStackTrace();
     	}
     }
-    public void setMoveParam(double alfa, double bet,double del) 
+    public void setMoveParam(double a, double b,double d) 
     {
-    	this.alpha = alfa;
-    	this.beta = bet;
-    	this.delta=del;
+    	alpha = a;
+    	beta = b;
+    	delta=d;
     }
     public double getAlpha() 
     {
@@ -236,10 +241,10 @@ public class StochasticOptimProb implements OptProblem {
     {
     	return delta;
     }   
-    public void setEvapParam(double et, double ro) 
+    public void setEvapParam(double e, double r) 
     {
-    	this.eta=et;
-    	this.rho=ro;
+    	eta=e;
+    	rho=r;
     }
     public double getEtha() 
     {
@@ -255,9 +260,9 @@ public class StochasticOptimProb implements OptProblem {
         return numControlPrint;
     }
     /** @param numControlPrint armazenamento desta variavel*/
-    public void setNumControlPrint(int numControlPrint) 
+    public void setNumControlPrint(int numCP) 
     {
-        this.numControlPrint = numControlPrint;
+        numControlPrint = numCP;
     }
     /** @return o actual_time */
     public double getActual_time() 
@@ -265,14 +270,14 @@ public class StochasticOptimProb implements OptProblem {
         return actual_time;
     }
     /** @param actual_time -- armazenamento do tempo atual */
-    public void setActual_time(double actualT) 
+    public void setActual_time(double aT) 
     {
-        this.actual_time = actualT;
+        actual_time = aT;
     }
     /** @param mevent -- armazenado o numero de move events */
-    public void set_mevent(int mevent)
+    public void set_mevent(int mev)
     {
-    	this.mevent = mevent;
+    	mevent = mev;
     }  
     /** @return o mmevent */
     public int get_mevent()
@@ -280,9 +285,9 @@ public class StochasticOptimProb implements OptProblem {
     	return mevent;
     }
     /** @param eevent -- armazenado o numero de eventos de evaporacao */
-    public void set_eevent(int eevent)
+    public void set_eevent(int eev)
     {
-    	this.eevent = eevent;
+    	eevent = eev;
     }  
     /** @return o eevent -- numero de eventos evaporacao */
     public int get_eevent()
@@ -295,9 +300,9 @@ public class StochasticOptimProb implements OptProblem {
         return pec;
     }
     /** @param pec the pec to set */
-    public void setPec(InterfacePec<Event> pec) 
+    public void setPec(InterfacePec<Event> p) 
     {
-        this.pec = pec;
+        pec = p;
     }
 	/** @return o numero total de nos*/
     public int getNbnodes() 
@@ -305,35 +310,35 @@ public class StochasticOptimProb implements OptProblem {
 		return nbnodes;
 	}
     /** @param nbnodes -- armazena o numero total de nos **/
-	public void setNbnodes(int nbnodes) 
+	public void setNbnodes(int totalnode) 
 	{
-		this.nbnodes = nbnodes;
+		nbnodes = totalnode;
 	}
 	/** @return o nestnode  **/
 	public int getNestnode() 
 	{
 		return nestnode;
 	}
-	/** @param nestnode --- armazena o nestnode **/
-	public void setNestnode(int nestnode) 
+	/** @param nnode --- armazena o nestnode **/
+	public void setNestnode(int nnode) 
 	{
-		this.nestnode = nestnode;
+		nestnode = nnode;
 	}
 	public double getPlevel() 
 	{
 		return plevel;
 	}
-	public void setPlevel(double plevel) 
+	public void setPlevel(double pL) 
 	{
-		this.plevel = plevel;
+		plevel = pL;
 	}
 	public int getAntcolsize() 
 	{
 		return antcolsize;
 	}
-	public void setAntcolsize(int antcolsize)
+	public void setAntcolsize(int antsize)
 	{
-		this.antcolsize = antcolsize;
+		antcolsize = antsize;
 	}
 	public List<Ant> getList_ants() 
 	{
@@ -343,9 +348,9 @@ public class StochasticOptimProb implements OptProblem {
 	{
 		return wTotal;
 	}
-	public void setwTotal(int wTotal) 
+	public void setwTotal(int wT) 
 	{
-		this.wTotal = wTotal;
+		wTotal = wT;
 	}
 
 

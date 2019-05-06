@@ -53,7 +53,7 @@ public class Evaporation extends Event{
 				else 
 				{
 					aux1.setPheromones(aux2);
-					op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),ec);
+					op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
 				}
 			}			
 		}
