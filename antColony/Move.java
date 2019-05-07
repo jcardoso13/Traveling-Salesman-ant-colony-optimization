@@ -57,7 +57,6 @@ public class Move extends Event {
 		
 		if (hcCompleto == 1)
 		{
-			//System.out.println("OLA");
 			ed=gr.GetVertex(ant.p.peekLast().getPath()).getE().iterator();
 			while(ed.hasNext())
 			{
@@ -70,8 +69,6 @@ public class Move extends Event {
 				}
 				
 			}
-		//	System.out.println("Finished HC");
-			//System.out.println("Dentro = "+ ant);
 			hcr = new HCResults(ant.getPath(),hC.calculate_cost(ant.getCost()));
 			iterH=op.hamcycle.iterator();
 			while(iterH.hasNext())
@@ -83,9 +80,8 @@ public class Move extends Event {
 			if(n==0)
 			{
 				op.hamcycle.add(hcr);
-				//System.out.println(ant);
 			}
-			pheromones_update = Event.expRandom(op.getPlevel()*op.getwTotal()/hcr.costTotal);
+			pheromones_update = Event.expRandom(op.getPlevel()*(op.getwTotal()/hcr.costTotal));
 			Iterator<pathw> iter = ant.p.iterator();
 			
 			while(iter.hasNext())
@@ -96,18 +92,12 @@ public class Move extends Event {
 					
 					aux2 = iter.next().getPath();
 					if(gr.FindE(aux1,aux2).getPheromones()==0)
-						op.getPec().addElement(new Evaporation(getTime()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
+						op.getPec().addElement(new Evaporation(op.getActual_time()+Event.expRandom(op.getEtha()),null,op.getRho(),gr.FindE(aux1,aux2),gr.FindE(aux2,aux1)),Event.ec);
 					
 					gr.FindE(aux1, aux2).setPheromones(gr.FindE(aux1,aux2).getPheromones()+ pheromones_update);
 					gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()+pheromones_update);
 				}
 			}
-			
-			/* Apagou-se o caminho e o custo. Formigas voltam para o nestnode */
-		/*	ant.path.clear();
-			ant.cost.clear();
-			ant.path.add(op.getNestnode());
-			ant.cost.add(0);*/
 			ant.p.clear();
 			ant.p.add(new pathw(op.getNestnode(),0));
 			
@@ -115,9 +105,9 @@ public class Move extends Event {
 		/* */
 		tempo_percurso = Event.expRandom(op.getDelta());
 		ant = hC.GetNextMove(ant);
-		tempo_percurso = Event.expRandom(op.getDelta()*ant.getCost().getLast());
+		tempo_percurso = Event.expRandom(op.getDelta()*ant.p.getLast().getCost());
 		
-		op.getPec().addElement(new Move(getTime()+tempo_percurso,ant),Event.ec);
+		op.getPec().addElement(new Move(op.getActual_time()+tempo_percurso,ant),Event.ec);
 		
 		
 	}

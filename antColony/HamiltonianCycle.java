@@ -47,20 +47,21 @@ public class HamiltonianCycle<T,E> {
 	 * @return
 	 * 
 	 ******************************************************************************/
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public Ant GetNextMove(Ant ant) 
 	{
-		LinkedList<Integer> weightTotal= ant.getCost();
-		LinkedList<T> path = (LinkedList<T>) ant.getPath();
+		//LinkedList<Integer> weightTotal= ant.getCost();
+		//LinkedList<T> path = (LinkedList<T>) ant.getPath();
+		LinkedList<pathw> path = (LinkedList<pathw>) ant.getP();
 		/* Lista de arestas do node corrente */
-		ArrayList<Edge<T,E>> Edges=G.GetEdgeVector(path.getLast()); 
+		ArrayList<Edge<T,E>> Edges=G.GetEdgeVector((T)path.getLast().getPath()); 
 		/* Array de probabilidades das arestas */
 		ArrayList<Double> prob= new ArrayList<Double>();
 		/* Array da disponibilidade da aresta */
 		ArrayList<Vertex<T,E>> available= new ArrayList<Vertex<T,E>>();
 		ArrayList<E> weight= new ArrayList<E>();
 		/* Variaveis auxiliares */
-		int n=0,i,j = 0,x=0;
+		int n=0,i,j = 0;//x=0;
 		double aux_double; 
 		double aux_accum = 0,aux_accum2 = 0;
 		boolean b;	
@@ -78,7 +79,7 @@ public class HamiltonianCycle<T,E> {
 			{
 				Edge<T,E> auxe=it_e.next();
 				Vertex<T,E> aux= new Vertex<T,E>(auxe.getLabel());
-				b=path.contains(auxe.getLabel());
+				b=ant.getPath().contains(auxe.getLabel());
 				/* Se a aresta nao estiver no caminho ainda */
 				if (!b)
 				{
@@ -93,6 +94,7 @@ public class HamiltonianCycle<T,E> {
 				j++;
 			}	 
 		}
+		else return ant;
 		/* Se exitem vertices que ainda nao foram visitados */
 		if (n!=0)
 		{
@@ -110,33 +112,30 @@ public class HamiltonianCycle<T,E> {
 		else //se nao houver caminho nao visitados
 		{
 			/* Calculo da probabilidade distribuida */
+			double j1;
 			for(i=0;i<j;i++)
 			{
-				aux_accum2+=(double)(1/j);
+				j1=(double)j;
+				aux_accum2+=(1/j1);
 				prob.add(aux_accum2);
 			}
 			next=random_decision(prob,j); /* retorna a escolha tomada */
-			next_label=Edges.get(next).getLabel(); // para saber a identificacao do node que vem a seguir
-			it_list=ant.p.iterator(); 
-			//itw_list=weightTotal.iterator();
-			/* Ajustar o caminho  */
-			x=0;
+			next_label=Edges.get(next).getLabel();// para saber a identificacao do node que vem a seguir
+			it_list=ant.p.iterator();
 			while(it_list.hasNext())
 			{
 				obj=it_list.next().path;
 			//	itw_list.next();
-				if(obj.equals(next_label))
+				if(obj.equals((Integer)next_label))
 				{
-					it_list.next();
 					while(it_list.hasNext())
 					{
-					ant.p.remove(it_list.next());
-                   // weightTotal.remove(itw_list.next());
-                    x++;
+					it_list.next();
+					it_list.remove();
 					}
 					break;
 				}
-				x++;
+				//x++;
 			}
 			
 		}

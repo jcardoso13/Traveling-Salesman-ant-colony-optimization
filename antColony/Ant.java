@@ -42,7 +42,7 @@ public class Ant {
 		hit = h;
 	}
 	/** @return hit **/
-	public boolean isHit()
+	public boolean getHit()
 	{
 		return hit;
 	}

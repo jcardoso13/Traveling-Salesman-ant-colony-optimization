@@ -50,7 +50,7 @@ public class StochasticOptimProb implements OptProblem {
 	/*3.parametros relacionados com formiga*/
 	private final List<Ant> list_ants;
 	private double plevel;
-	private int antcolsize,total;
+	private int antcolsize;//total;
 	LinkedList <HCResults> hamcycle = new LinkedList<HCResults>();
 	HamiltonianCycle<Integer,Integer> hC;
 	
@@ -77,15 +77,17 @@ public class StochasticOptimProb implements OptProblem {
 	public void simulacao() {
 		
 		Event ev;
+		//Event aux;
 		/* ========================= SIMULACAO ===========================*/
-		while (this.getActual_time()<this.finalinst)
+		while (this.getActual_time()<=this.finalinst)
 		{
 			ev = this.getPec().getFirstElement(); // passa para o proximo evento do PEC
 			//System.out.println(ev);
 			
-			while (ev != null)
+			if(ev != null)
 			{
 				this.setActual_time(ev.getTime()); // Avanco rapido ate a hora de executa-lo
+				//System.out.println(actual_time);
 				if (ev.getClass() == Move.class)
 				{
 					this.set_mevent(this.get_mevent()+1);
@@ -96,12 +98,18 @@ public class StochasticOptimProb implements OptProblem {
 				else if (ev.getClass() == Evaporation.class)
 				{
 					this.set_eevent(this.get_eevent()+1);
+					//System.out.println(actual_time);
 					//System.out.println();
 					//System.out.println("eevent = "+ eevent);
 				}
+				else if(ev.getClass() == EventControlPrints.class)
+				{
+					//System.out.println(pec);
+				}
 				ev.ExecutaEvent(this,this.Gr,hC);	
-				ev = this.getPec().getFirstElement();
+				
 			}
+			else break;
 
 		}
 		
@@ -125,7 +133,7 @@ public class StochasticOptimProb implements OptProblem {
 		}
 		for (int j = 0; j <= 20; j++ )
 		{
-			getPec().addElement(new EventControlPrints(ctrl_time*j), Event.ec);
+			getPec().addElement(new EventControlPrints(ctrl_time*j+0.0000000001), Event.ec);
 		}
 		this.simulacao();
 		//System.out.println(hamcycle);

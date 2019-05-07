@@ -62,7 +62,6 @@ public class EventControlPrints extends Event {
         opt=op.findOpt();
         if(!opt.getPath().isEmpty())
         System.out.print("Hamiltonian cycle: " + opt);
-        
         /**
          * falta o caminho ....
          */

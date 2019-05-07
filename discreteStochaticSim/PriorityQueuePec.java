@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Queue;
+//import java.util.Queue;
 
 /**********************************************************************************
  * PEC implementado com uma Priority Queue
@@ -22,7 +22,7 @@ import java.util.Queue;
 public class PriorityQueuePec<T extends InterfaceEvent> implements InterfacePec<T> {
 
 	/* ==== ATRIBUTOS ==== */
-	private Queue<T> element_queue;
+	private PriorityQueue<T> element_queue;
 	private int numbElements;
 	
 	/* ==== CONSTRUTOR ==== */
@@ -60,7 +60,10 @@ public class PriorityQueuePec<T extends InterfaceEvent> implements InterfacePec<
 	 *********************************************************************************************/
 	public boolean addElement(T element, Comparator<T> c) 
 	{
+		//element_queue.
 		element_queue.add(element);
+		//elEM.sort(Event.ec);
+		//toStringOrdered()
 		numbElements++;
 		return true;
 	}

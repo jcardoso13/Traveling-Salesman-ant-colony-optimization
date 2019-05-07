@@ -8,6 +8,7 @@ public class HCResults {
 	LinkedList<Integer> path;
 	int costTotal;
 
+	@SuppressWarnings("unchecked")
 	public HCResults(LinkedList<Integer> p, int cT)
 	{
 		this.path =(LinkedList<Integer>)p.clone();
