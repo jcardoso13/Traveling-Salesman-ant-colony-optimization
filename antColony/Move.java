@@ -45,6 +45,12 @@ public class Move extends Event {
 		
 		StochasticOptimProb op = (StochasticOptimProb) opp;
 		Ant ant = this.getAnt(); 
+		
+		if(gr.getG().isEmpty())
+			return;
+		if(gr.getG().get(0).getE().isEmpty())
+			return;
+			
 		//System.out.println(ant);
 		//System.out.println(ant.path.size() == op.getNbnodes());/* problema encontrado: o ciclo de hamiltion nunca termina */
 		for(Edge<Integer,Integer> iter : gr.GetEdgeVector(ant.getP().peekLast().getPath()))

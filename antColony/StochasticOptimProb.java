@@ -104,7 +104,7 @@ public class StochasticOptimProb implements OptProblem {
 				}
 				else if(ev.getClass() == EventControlPrints.class)
 				{
-					System.out.println(Gr.getG().get(2));
+					//System.out.println(Gr.getG().get(2));
 				}
 				ev.ExecutaEvent(this,this.Gr,hC);	
 				
@@ -121,7 +121,6 @@ public class StochasticOptimProb implements OptProblem {
 		hC = new HamiltonianCycle<Integer,Integer>(alpha,beta,Gr);
 		setActual_time(0);
 		ctrl_time = finalinst/20;
-		
 		
 		//Adiciona as impressoes do controlo de Evento ao PEC
 		for (int i = 0; i < antcolsize; i++)
