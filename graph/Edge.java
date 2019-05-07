@@ -29,7 +29,7 @@ public class Edge<T,E>{
 
 	//Para println
 	public String toString() {
-		return "\nLabel:"+ this.label + " Weight:"+ this.weight+"\n"; 
+		return "\nLabel:"+ this.label + " Weight:"+ this.weight+"\n" + this.pheromones + "\n"; 
 	}
 	
 	public void setPheromones(double pher)

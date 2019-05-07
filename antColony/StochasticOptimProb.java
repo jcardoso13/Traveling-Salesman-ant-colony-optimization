@@ -104,7 +104,7 @@ public class StochasticOptimProb implements OptProblem {
 				}
 				else if(ev.getClass() == EventControlPrints.class)
 				{
-					//System.out.println(pec);
+					System.out.println(Gr.getG().get(2));
 				}
 				ev.ExecutaEvent(this,this.Gr,hC);	
 				

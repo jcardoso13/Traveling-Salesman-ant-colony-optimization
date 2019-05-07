@@ -27,7 +27,7 @@ public class EventControlPrints extends Event {
 	 *  
 	 * @param time e o instante em que queremos imprimir a informacao de controlo
 	 **********************************************************************************************/
-	public EventControlPrints(double time) {
+	EventControlPrints(double time) {
 		super(time, null);
 	}
 

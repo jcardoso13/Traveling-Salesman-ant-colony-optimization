@@ -47,9 +47,9 @@ public class Move extends Event {
 		Ant ant = this.getAnt(); 
 		//System.out.println(ant);
 		//System.out.println(ant.path.size() == op.getNbnodes());/* problema encontrado: o ciclo de hamiltion nunca termina */
-		for(Edge<Integer,Integer> iter : gr.GetEdgeVector(ant.p.peekLast().getPath()))
+		for(Edge<Integer,Integer> iter : gr.GetEdgeVector(ant.getP().peekLast().getPath()))
 		{
-			if (ant.p.size() == op.getNbnodes() && iter.getLabel().equals(ant.p.peekFirst().getPath()))
+			if (ant.getP().size() == op.getNbnodes() && iter.getLabel().equals(ant.getP().peekFirst().getPath()))
 			{
 				hcCompleto = 1;
 			}
@@ -57,7 +57,7 @@ public class Move extends Event {
 		
 		if (hcCompleto == 1)
 		{
-			ed=gr.GetVertex(ant.p.peekLast().getPath()).getE().iterator();
+			ed=gr.GetVertex(ant.getP().peekLast().getPath()).getE().iterator();
 			while(ed.hasNext())
 			{
 				Ed=ed.next();
@@ -65,7 +65,7 @@ public class Move extends Event {
 				if(label==op.getNestnode())
 				{
 					w=Ed.getWeight();
-					ant.p.add(new pathw(op.getNestnode(),w));
+					ant.getP().add(new pathw(op.getNestnode(),w));
 				}
 				
 			}
@@ -82,7 +82,7 @@ public class Move extends Event {
 				op.hamcycle.add(hcr);
 			}
 			pheromones_update = Event.expRandom(op.getPlevel()*(op.getwTotal()/hcr.costTotal));
-			Iterator<pathw> iter = ant.p.iterator();
+			Iterator<pathw> iter = ant.getP().iterator();
 			
 			while(iter.hasNext())
 			{
@@ -98,14 +98,14 @@ public class Move extends Event {
 					gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()+pheromones_update);
 				}
 			}
-			ant.p.clear();
-			ant.p.add(new pathw(op.getNestnode(),0));
+			ant.getP().clear();
+			ant.getP().add(new pathw(op.getNestnode(),0));
 			
 		}
 		/* */
 		tempo_percurso = Event.expRandom(op.getDelta());
 		ant = hC.GetNextMove(ant);
-		tempo_percurso = Event.expRandom(op.getDelta()*ant.p.getLast().getCost());
+		tempo_percurso = Event.expRandom(op.getDelta()*ant.getP().getLast().getCost());
 		
 		op.getPec().addElement(new Move(op.getActual_time()+tempo_percurso,ant),Event.ec);
 		

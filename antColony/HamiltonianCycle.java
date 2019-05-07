@@ -30,7 +30,7 @@ public class HamiltonianCycle<T,E> {
 	 * @param g
 	 * 
 	 *********************************************************************/
-	public HamiltonianCycle(double A,double b,graph<T,E> g)
+	HamiltonianCycle(double A,double b,graph<T,E> g)
 	{
 		//this.path= new ArrayList<Vertex<T,E>>();
 		this.alpha=A;
@@ -48,12 +48,13 @@ public class HamiltonianCycle<T,E> {
 	 * 
 	 ******************************************************************************/
 	//@SuppressWarnings("unchecked")
-	public Ant GetNextMove(Ant ant) 
+	Ant GetNextMove(Ant ant) 
 	{
 		//LinkedList<Integer> weightTotal= ant.getCost();
 		//LinkedList<T> path = (LinkedList<T>) ant.getPath();
 		LinkedList<pathw> path = (LinkedList<pathw>) ant.getP();
 		/* Lista de arestas do node corrente */
+		@SuppressWarnings("unchecked")
 		ArrayList<Edge<T,E>> Edges=G.GetEdgeVector((T)path.getLast().getPath()); 
 		/* Array de probabilidades das arestas */
 		ArrayList<Double> prob= new ArrayList<Double>();
@@ -107,7 +108,7 @@ public class HamiltonianCycle<T,E> {
 			next=random_decision(prob,n); /* retorna a escolha tomada */
 			//path.add(available.get(next).getLabel()); /* adiciona a escolha no caminho */
 			//weightTotal.add((Integer)weight.get(next));
-			ant.p.add(new pathw((Integer)available.get(next).getLabel(),(Integer)weight.get(next)));
+			ant.getP().add(new pathw((Integer)available.get(next).getLabel(),(Integer)weight.get(next)));
 		}
 		else //se nao houver caminho nao visitados
 		{
@@ -121,7 +122,7 @@ public class HamiltonianCycle<T,E> {
 			}
 			next=random_decision(prob,j); /* retorna a escolha tomada */
 			next_label=Edges.get(next).getLabel();// para saber a identificacao do node que vem a seguir
-			it_list=ant.p.iterator();
+			it_list=ant.getP().iterator();
 			while(it_list.hasNext())
 			{
 				obj=it_list.next().path;
@@ -159,8 +160,8 @@ public class HamiltonianCycle<T,E> {
 	 *****************************************************************************/
 	private double Calc_Coef(double alpha, double beta, double phero, E weight) 
 	{
-		int w;
-		w=(int)weight;
+		double w;
+		w=(double)(int)weight;
 		return (alpha+phero)/(beta+w);
 	}
 	

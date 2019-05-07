@@ -155,7 +155,7 @@ public class graph<T,E> implements GraphInterface<T,E>{
 			while(e.hasNext())
 			{
 				ed=e.next();
-				if (ed.equals(v2))
+				if (ed.getLabel().equals(v2.getLabel()))
 				{
 					return ed;
 				}

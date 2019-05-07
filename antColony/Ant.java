@@ -20,7 +20,7 @@ public class Ant {
 	/* ===== ATRIBUTOS ===== */
 	//LinkedList<Integer> path;
 	//LinkedList<Integer> cost ;
-	LinkedList<pathw> p;
+	private LinkedList<pathw> p;
 	private boolean hit;
 	
 	/* ===== CONSTRUTOR ===== */
@@ -48,7 +48,7 @@ public class Ant {
 	}
 	/** @param path -- armazena o caminho **/
 	
-	public void setP(LinkedList<pathw> path)
+	void setP(LinkedList<pathw> path)
 	{
 		p=path;
 	}
@@ -83,26 +83,5 @@ public class Ant {
 	{
 		return p.toString();
 	}
-	/*    public void setPath(LinkedList<Integer> p)
-	{
-		path = p;
-	}
-	/** @return the path **/
-	/*public LinkedList<Integer> getPath()
-	{
-		return path;
-	}
-	/** @return the cost */
-	/*public LinkedList<Integer> getCost() 
-	{
-		return cost;
-	}	
-	/** @param cost -- armazena o custo do caminho **/
-	/*public void setCost(LinkedList<Integer> c) 
-	{
-		cost = c;
-	}
-	
-	*/
 
 }
