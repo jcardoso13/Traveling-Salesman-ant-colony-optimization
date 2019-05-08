@@ -50,7 +50,7 @@ public class Evaporation extends Event{
 		{
 			this.edge1.setPheromones(aux2);
 			this.edge2.setPheromones(aux2);
-			op.getPec().addElement(new Evaporation(op.getActual_time()+Event.expRandom(op.getEtha()),null,op.getRho(),this.edge1,this.edge2),Event.ec);
+			op.getPec().addElement(new Evaporation(op.p.getActual_time()+Event.expRandom(op.p.getEtha()),null,op.p.getRho(),this.edge1,this.edge2),Event.ec);
 			
 		}
 		

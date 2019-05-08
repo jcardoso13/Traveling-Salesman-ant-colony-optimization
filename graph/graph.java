@@ -144,6 +144,7 @@ public class graph<T,E> implements GraphInterface<T,E>{
 		Vertex<T,E> v2= new Vertex<T,E>(label2);
 		Iterator<Edge<T,E>> e;
 		Edge<T,E> ed;
+		@SuppressWarnings("unchecked")
 		Edge<T,E> error= (Edge<T, E>) new Edge<Integer,Integer>(0,0);
 		Vertex<T,E> v3;
 		int x;

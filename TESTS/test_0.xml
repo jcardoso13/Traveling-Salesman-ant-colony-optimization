@@ -1,68 +1,20 @@
-<simulation finalinst="400.0" antcolsize="500" plevel="0.5">
-	<graph nbnodes="10" nestnode="1">
+<simulation finalinst="300.0" antcolsize="200" plevel="0.5">
+	<graph nbnodes="5" nestnode="1">
 		<node nodeidx="1">
 			<weight targetnode="2">3</weight>
 			<weight targetnode="3">6</weight>
 			<weight targetnode="4">6</weight>
 			<weight targetnode="5">2</weight>
-			<weight targetnode="6">2</weight>
-			<weight targetnode="7">5</weight>
-			<weight targetnode="8">2</weight>
-			<weight targetnode="9">5</weight>
-			<weight targetnode="10">2</weight>
 		</node>
 		<node nodeidx="2">
 			<weight targetnode="3">3</weight>
 			<weight targetnode="4">2</weight>
 			<weight targetnode="5">5</weight>
-			<weight targetnode="6">2</weight>
-			<weight targetnode="7">5</weight>
-			<weight targetnode="8">2</weight>
-			<weight targetnode="9">5</weight>
-			<weight targetnode="10">2</weight>
 		</node>
-		<node nodeidx="3">
-			<weight targetnode="4">2</weight>
-			<weight targetnode="5">5</weight>
-			<weight targetnode="6">2</weight>
-			<weight targetnode="7">5</weight>
-			<weight targetnode="8">2</weight>
-			<weight targetnode="9">5</weight>
-		</node>
+		<node nodeidx="3"> </node>
 		<node nodeidx="4">
 			<weight targetnode="5">1</weight>
-			<weight targetnode="6">2</weight>
-			<weight targetnode="7">5</weight>
-			<weight targetnode="8">2</weight>
-			<weight targetnode="9">5</weight>
-			<weight targetnode="10">2</weight>
 		</node>
-		<node nodeidx="5">
-			<weight targetnode="6">2</weight>
-			<weight targetnode="7">5</weight>
-			<weight targetnode="8">2</weight>
-			<weight targetnode="9">5</weight>
-			<weight targetnode="10">2</weight>
-		</node>
-		<node nodeidx="6">
-			<weight targetnode="7">5</weight>
-			<weight targetnode="8">2</weight>
-			<weight targetnode="9">5</weight>
-			<weight targetnode="10">2</weight>
-		</node>
-		<node nodeidx="7">
-			<weight targetnode="8">2</weight>
-			<weight targetnode="9">5</weight>
-			<weight targetnode="10">2</weight>
-		</node>
-		<node nodeidx="8">
-			<weight targetnode="9">5</weight>
-			<weight targetnode="10">2</weight>
-		</node>
-		<node nodeidx="9">
-			<weight targetnode="10">2</weight>
-		</node>
-		<node nodeidx="10"></node>
 	</graph>
 	<events>
 		<move alpha="1.0" beta="1.0" delta="0.2"/>

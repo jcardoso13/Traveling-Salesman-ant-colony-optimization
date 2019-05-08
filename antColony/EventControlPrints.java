@@ -19,8 +19,6 @@ import graph.graph;
 public class EventControlPrints extends Event {
 	/* ==== ATRIBUTOS ==== */
 	
-	private static final boolean DEBUG=false;
-	
 	/* ==== CONSTRUTORES ==== */	
 	/*********************************************************************************************
 	 *  Este e o construtor. O que ele faz e chamar o construtor da super classe com 
@@ -42,7 +40,6 @@ public class EventControlPrints extends Event {
 	 * enunciado do projeto.
 	 * 
 	 **********************************************************************************************/
-	@SuppressWarnings("unused")
 	public void ExecutaEvent(OptProblem opP,graph<Integer,Integer> gr,HamiltonianCycle<Integer,Integer> hC) 
 	{
         String formato1 = "%-35s %-16f\n";
@@ -56,7 +53,7 @@ public class EventControlPrints extends Event {
 		op.setNumControlPrint(op.getNumControlPrint()+1);
         System.out.println("Observation " + numControl + ":");
         System.out.println("\t\t");
-        System.out.printf(formato1,"Present Instant: ",op.getActual_time());
+        System.out.printf(formato1,"Present Instant: ",op.p.getActual_time());
         System.out.println("\t\t");
 		System.out.printf(formato2, "Number of move events: ",op.get_mevent());
         System.out.println("\t\t");
@@ -65,11 +62,6 @@ public class EventControlPrints extends Event {
         opt=op.findOpt();
         if(!opt.getPath().isEmpty())
         System.out.print("Hamiltonian cycle: " + opt);
-        
-        if(DEBUG==true) {
-	        if(op.getActual_time()>(double)400)
-	        System.out.println("Unique paths:\n" + op.hamcycle.size());
-        }
         /**
          * falta o caminho ....
          */

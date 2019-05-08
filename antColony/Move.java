@@ -55,7 +55,7 @@ public class Move extends Event {
 		//System.out.println(ant.path.size() == op.getNbnodes());/* problema encontrado: o ciclo de hamiltion nunca termina */
 		for(Edge<Integer,Integer> iter : gr.GetEdgeVector(ant.getP().peekLast().getPath()))
 		{
-			if (ant.getP().size() == op.getNbnodes() && iter.getLabel().equals(ant.getP().peekFirst().getPath()))
+			if (ant.getP().size() == op.p.getNbnodes() && iter.getLabel().equals(ant.getP().peekFirst().getPath()))
 			{
 				hcCompleto = 1;
 			}
@@ -68,11 +68,10 @@ public class Move extends Event {
 			{
 				Ed=ed.next();
 				label=Ed.getLabel();
-				if(label==op.getNestnode())
+				if(label==op.p.getNestnode())
 				{
 					w=Ed.getWeight();
-					//ant.getP().add(new pathw(op.getNestnode(),w));
-					ant.getP().get(0).setCost(w);
+					ant.getP().add(new pathw(op.p.getNestnode(),w));
 				}
 				
 			}
@@ -88,7 +87,7 @@ public class Move extends Event {
 			{
 				op.hamcycle.add(hcr);
 			}
-			pheromones_update = Event.expRandom(op.getPlevel()*(op.getwTotal()/hcr.costTotal));
+			pheromones_update = Event.expRandom(op.p.getPlevel()*(op.getwTotal()/hcr.costTotal));
 			Iterator<pathw> iter = ant.getP().iterator();
 			
 			while(iter.hasNext())
@@ -99,22 +98,22 @@ public class Move extends Event {
 					
 					aux2 = iter.next().getPath();
 					if(gr.FindE(aux1,aux2).getPheromones()==0)
-						op.getPec().addElement(new Evaporation(op.getActual_time()+Event.expRandom(op.getEtha()),null,op.getRho(),gr.FindE(aux1,aux2),gr.FindE(aux2,aux1)),Event.ec);
+						op.getPec().addElement(new Evaporation(op.p.getActual_time()+Event.expRandom(op.p.getEtha()),null,op.p.getRho(),gr.FindE(aux1,aux2),gr.FindE(aux2,aux1)),Event.ec);
 					
 					gr.FindE(aux1, aux2).setPheromones(gr.FindE(aux1,aux2).getPheromones()+ pheromones_update);
 					gr.FindE(aux2, aux1).setPheromones(gr.FindE(aux2,aux1).getPheromones()+pheromones_update);
 				}
 			}
 			ant.getP().clear();
-			ant.getP().add(new pathw(op.getNestnode(),0));
+			ant.getP().add(new pathw(op.p.getNestnode(),0));
 			
 		}
 		/* */
-		tempo_percurso = Event.expRandom(op.getDelta());
+		tempo_percurso = Event.expRandom(op.p.getDelta());
 		ant = hC.GetNextMove(ant);
-		tempo_percurso = Event.expRandom(op.getDelta()*ant.getP().getLast().getCost());
+		tempo_percurso = Event.expRandom(op.p.getDelta()*ant.getP().getLast().getCost());
 		
-		op.getPec().addElement(new Move(op.getActual_time()+tempo_percurso,ant),Event.ec);
+		op.getPec().addElement(new Move(op.p.getActual_time()+tempo_percurso,ant),Event.ec);
 		
 		
 	}
