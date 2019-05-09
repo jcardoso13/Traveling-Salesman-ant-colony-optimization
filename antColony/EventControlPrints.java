@@ -8,7 +8,7 @@ import graph.graph;
  * 
  * @author Grupo 11
  * 
- * 	<p> Esta subclasse e uma extensao da classe Event abstrata e manipulara os eventos
+ * 	<p> Esta subclasse e uma extensão da classe Event abstrata e manipulara os eventos
  *  Control Print. Nao possui campos em si, mas herda o tempo e o individuo da superclasse.
  *  Individual e definido como nulo e o tempo e definido como um multiplo do tempo total 
  *  dividido por 20. Ele precisa sobrescrever os metodos Execute Event e toString.
@@ -21,11 +21,11 @@ public class EventControlPrints extends Event {
 	
 	/* ==== CONSTRUTORES ==== */	
 	/*********************************************************************************************
-	 *  Este e o construtor. O que ele faz e chamar o construtor da super classe com 
-	 *  os argumentos indicados. Ant e sempre null uma vez que nao fazemos "target"
+	 *  Este é o construtor.O que ele faz é chamar o construtor da super classe com 
+	 *  os argumentos indicados. Ant é sempre null uma vez que não fazemos "target"
 	 *  a uma formiga em especifico.
 	 *  
-	 * @param time e o instante em que queremos imprimir a informacao de controlo
+	 * @param time é o instante em que queremos imprimir a informação de controlo.
 	 **********************************************************************************************/
 	EventControlPrints(double time) {
 		super(time, null);
@@ -33,12 +33,14 @@ public class EventControlPrints extends Event {
 
 	/* ==== METODOS ==== */
 	/*********************************************************************************************
-	 * Este metodo e uma redefinicao do metodo geral de evento com o mesmo nome.	 
+	 * Este método é uma redefinição do método geral de evento com o mesmo nome.	 
 	 * 
-	 * @see discreteStochasticSim.Event#ExecutaEvent(antColony.OptProblem) para mais informacao.
-	 * Neste caso em particular, temos que imprimir as informacoes de controle solicitadas no 
+	 * Neste caso em particular, temos que imprimir as informações de controle solicitadas no 
 	 * enunciado do projeto.
 	 * 
+	 * @param opP -- Problema de Optimização com os dados todos a analisar  
+	 * @param gr -- grafo do problema a optimizar
+	 * @param hC -- ciclo hamiltoniano
 	 **********************************************************************************************/
 	public void ExecutaEvent(OptProblem opP,graph<Integer,Integer> gr,HamiltonianCycle<Integer,Integer> hC) 
 	{
@@ -62,19 +64,7 @@ public class EventControlPrints extends Event {
         opt=op.findOpt();
         if(!opt.getPath().isEmpty())
         System.out.print("Hamiltonian cycle: " + opt);
-        /**
-         * falta o caminho ....
-         */
         System.out.println();
-	}
-
-	/**********************************************************************************************
-	 * toString -- metodo que substitui aquele com o mesmo nome na superclasse Object.  
-	 * Uma vez que esta classa extende a superclasse que e abstracta e tem toString como metodo
-	 * implica que esta redefinicao e obrigatoria
-	 **********************************************************************************************/
-	public String toString() {
-		return ("(Type:ControlPrint" + ",Time:" + this.getTime() + " & No ant)");
 	}
 
 }

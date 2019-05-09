@@ -5,11 +5,20 @@ import java.util.Iterator;
 import discreteStochaticSim.Event;
 import graph.*;
 
+
+/***********************************************************************************************
+ * Movimento das formigas pelo grafo de forma a encontrar um caminho
+ * 
+
+ * @author Grupo 11
+ * <p> Esta subclasse é uma extensão da classe Event abstrata e manipulará os eventos de movimento
+ * das formigas. Herda o tempo e também a formiga em específico que se irá mover.
+ ***********************************************************************************************/
 public class Move extends Event {
 
 	/* ==== ATRIBUTOS ===== */
 	
-	/* ==== CONSTRUTORES ==== */
+	/* ==== CONSTRUTOR ==== */
 	/***************************************************************************************
 	 *  Este e o construtor. A unica coisa que faz e chamar o construtor da superclasse com
 	 *  os argumentos do Evento.
@@ -25,11 +34,15 @@ public class Move extends Event {
 	/* ==== METODOS ==== */
 
 	/***************************************************************************************
-	 *  Este metodo e a redefinicao do metodo do Event geral com o mesmo nome.
+	 * Este método é a redefinição do método do Event geral com o mesmo nome.
 	 *  
-	 * @see discreteStochasticOptimProb.Event#ExecutaEvent(antColony.OptProblem) para mais 
-	 * informacoes. Neste caso em particular podemos mover a formiga no evento para nodes
-	 * validos. Precisamos de verificar por ciclos. Se detetarmos um caminho
+	 * Neste caso em particular podemos mover a formiga no evento para nodes válidos. 
+	 * Precisamos de verificar por ciclos.
+	 * 
+	 * 
+	 * @param opp -- Problema de Optimização com os dados todos a analisar  
+	 * @param gr -- grafo do problema a optimizar
+	 * @param hC -- ciclo hamiltoniano
 	 **************************************************************************************/
 	public void ExecutaEvent(OptProblem opp,graph<Integer,Integer> gr,HamiltonianCycle<Integer,Integer> hC) 
 	{
@@ -52,7 +65,6 @@ public class Move extends Event {
 			return;
 			
 		//System.out.println(ant);
-		//System.out.println(ant.path.size() == op.getNbnodes());/* problema encontrado: o ciclo de hamiltion nunca termina */
 		for(Edge<Integer,Integer> iter : gr.GetEdgeVector(ant.getP().peekLast().getPath()))
 		{
 			if (ant.getP().size() == op.p.getNbnodes() && iter.getLabel().equals(ant.getP().peekFirst().getPath()))
@@ -119,12 +131,10 @@ public class Move extends Event {
 	}
 
 	/*****************************************************************************
-	 * toString metodo que substitui aquele com o mesmo nome na superclasse Object.
+	 * toString método que substitui aquele com o mesmo nome na superclasse Object.
 	 ****************************************************************************/
 	public String toString() {
-		return ("(Type:Move, AntID:,Time"
-				+ this.getTime()
-				+ ")");
+		return ("(Type:Move,Time"+ this.getTime()+ ")");
 	}
 
 

@@ -4,20 +4,40 @@ import discreteStochaticSim.Event;
 import graph.Edge;
 import graph.graph;
 
-/************************************************************************
- * 
+/**********************************************************************************
+ *  Evaporação das Feromonas 
  * 
  * 
  * 
  * @author Grupo 11
  *
- ************************************************************************/
+ * <p> Esta subclasse é uma extensão da classe Event abstrata e manipulará
+ * os eventos de Evaporação. Herda o tempo, mas no entanto não é necessário
+ * saber o indíviduo (ant), pelo que é definido a null, para que haja evaporação das feromonas. 
+ *****************************************************************************************/
 
 public class Evaporation extends Event{
 
+	/* ==== ATRIBUTOS ==== */
+	/** quantidade de feromonas **/
 	double quantidade;
+	/** aresta considerando um sentido **/
 	Edge<Integer,Integer> edge1;
+	/** aresta considerando o sentido contrário **/
 	Edge<Integer,Integer> edge2;
+	
+	/* ==== CONSTRUTOR ==== */
+	/********************************************************************
+	 * Este é o construtor. O que ele faz é chamar o construtor da super
+	 * classe com os argumentos indicados. Ant é sempre null uma vez que
+	 * não fazemos "target" a uma formiga em específico.
+	 * 
+	 * @param t - instanto em que queremos evaporar as feromonas
+	 * @param a - formiga, no entanto colocámos a null
+	 * @param quant - quantidade de feromonas que irá sendo atualizada
+	 * @param ed1 - edge considerando um sentido 
+	 * @param ed2 - edge considerando o sentido oposto 
+	 *********************************************************************/
 	public Evaporation(double t, Ant a,double quant,Edge<Integer,Integer> ed1,Edge<Integer,Integer>ed2) 
 	{
 		super(t, null);
@@ -26,17 +46,21 @@ public class Evaporation extends Event{
 		
 		quantidade = quant;
 	}
-
+	
+	/* ==== METODOS ==== */
 	/**************************************************************************
-	 * ExecutaEvent --
+	 * ExecutaEvent -- Este método é uma redefinição do método geral de evento 
+	 * com o mesmo nome. Neste caso queremos ir atualizando a quantidade de
+	 * feromonas nas arestas do grafo e adicionar ao pec o novo evento para a 
+	 * evaporação da feromona.
 	 * 
-	 * @param op 
-	 * 
+	 * @param opp -- Problema de Optimização com os dados todos a analisar  
+	 * @param gr -- grafo do problema a optimizar
+	 * @param hc -- ciclo hamiltoniano
 	 **************************************************************************/
+	
 	public void ExecutaEvent(OptProblem opp,graph<Integer,Integer> gr,HamiltonianCycle<Integer,Integer> hc) 
 	{
-		//Edge<Integer,Integer> edge1=(Edge<Integer,Integer>)obj;
-		//Edge<Integer,Integer> ed1=(Edge<Integer,Integer>)obj2;
 		StochasticOptimProb op = (StochasticOptimProb) opp;
 		double aux2=0;
 		
@@ -51,62 +75,9 @@ public class Evaporation extends Event{
 			this.edge1.setPheromones(aux2);
 			this.edge2.setPheromones(aux2);
 			op.getPec().addElement(new Evaporation(op.p.getActual_time()+Event.expRandom(op.p.getEtha()),null,op.p.getRho(),this.edge1,this.edge2),Event.ec);
-			
-		}
-		
-		
-		//Edge<Integer,Integer> aux1;
-		//Iterator<Vertex<Integer,Integer>> iter2 = gr.getG().iterator();
-		//Vertex<Integer,Integer> a;
-		//Iterator <Edge<Integer,Integer>> iter;
-		/*while (iter2.hasNext())
-		{
-			a= iter2.next();
-			iter=a.getE().iterator();
-			while(iter.hasNext())
-			{
-				aux1 = iter.next();
-				aux2 = aux1.getPheromones()-quantidade;
-				if (aux2 <= 0)
-				{
-					aux1.setPheromones(0);
-					
-				}
-				else 
-				{
-					if(!aux1.getEvap())
-					{
-						aux1.setPheromones(aux2);
-						aux1.setEvap(true);
-						aux1=gr.FindE(aux1.getLabel(),a.getLabel());
-						aux1.setPheromones(aux2);
-						aux1.setEvap(true);
-						op.getPec().addElement(new Evaporation(op.getActual_time()+Event.expRandom(op.getEtha()),null,op.getRho()),Event.ec);
-					}
-				}
-			}			
-		}
-		iter2 = gr.getG().iterator();
-		while (iter2.hasNext())
-		{
-			iter=iter2.next().getE().iterator();
-			while(iter.hasNext())
-			{
-				iter.next().setEvap(false);
-			}
-		}
-		
-		*/
-		
-		//op.getPec().addElement(new Evaporation(getTime()+ expRandom(op.getEtha()),null,op.getRho()), Event.ec);
+		}	
+	
 	}
 	
-	/*****************************************************************************
-	 * toString metodo que substitui aquele com o mesmo nome na superclasse Object.
-	 ****************************************************************************/
-	public String toString() 
-	{
-		return null;
-	}
 
 }

@@ -38,15 +38,12 @@ public abstract class Event implements InterfaceEvent {
 	 * Metodo abstrato da execucao do evento. Cada tipo de evento deve redefinir este 
 	 * metodo para fazer o que deve fazer.
 	 * 
-	 * @param op e o problema de optmizacao a que este evento pertence
+	 * @param opp e o problema de optmizacao a que este evento pertence
+	 * @param gr -- grafo do problema a optimizar
+	 * @param hc -- ciclo hamiltoniano
 	 *****************************************************************************/
 	public abstract void ExecutaEvent(OptProblem opp,graph<Integer,Integer> gr,HamiltonianCycle<Integer,Integer> hc);
 	
-	
-	/*****************************************************************************
-	 * toString metodo que substitui aquele com o mesmo nome na superclasse Object.
-	 ****************************************************************************/
-	public abstract String toString();
 	
 	/**********************************************************************************
 	 * Metodo que retorna um numero aleatorio de acordo com um exponencial com media m. 
@@ -63,17 +60,17 @@ public abstract class Event implements InterfaceEvent {
 	}
 
 	
-	/** @return a formiga **/
+	/** @return ant **/
 	public Ant getAnt()
 	{
 		return ant;
 	}
-	/** @return o tempo **/
+	/** @return time_stamp **/
     public double getTime() 
     {
     	return time_stamp;
     }
-    /** @param tempo ira ser armazenado **/
+    /** @param ts ira ser armazenado **/
     public void setTime(double ts) 
     {
     	time_stamp = ts;

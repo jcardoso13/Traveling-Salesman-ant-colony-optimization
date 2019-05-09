@@ -2,7 +2,7 @@ package antColony;
 
 
 /**********************************************************************
- *  Interface para a otimização do Problema
+ *  Interface para a otimização do Problema.
  * 
  * 
  * @author Grupo 11
@@ -25,7 +25,7 @@ public interface OptProblem {
 	 * analisá-lo adequadamente, inicializar o problema de otimização e, em seguida, chamar o método
 	 * de simulação.
 	 * 
-	 * @param filename é o nome do arquivo que contém o teste
+	 * @param filename é o nome do arquivo que contém o teste.
 	 ******************************************************************************************************/
 	 public void runOptimizationProb(String filename);
 	 
