@@ -50,7 +50,7 @@ public class HamiltonianCycle<T,E> {
 	 * @return
 	 *
 	 **********************************************************************/
-	Ant GetNextMove(Ant ant) 
+	public Ant GetNextMove(Ant ant) 
 	{
 		LinkedList<pathw> path = (LinkedList<pathw>) ant.getP();
 		/* Lista de arestas do node corrente */

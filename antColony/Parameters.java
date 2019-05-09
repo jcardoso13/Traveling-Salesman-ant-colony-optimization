@@ -12,7 +12,7 @@ import graph.graph;
  *
  *********************************************************/
 
-class Parameters {
+public class Parameters {
 	
 	/*1.parametros relacionados com o tempo*/
 	/** Instante Final com que a simulação termina **/

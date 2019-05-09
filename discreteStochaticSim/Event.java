@@ -6,20 +6,27 @@ import antColony.Ant;
 import antColony.HamiltonianCycle;
 import antColony.OptProblem;
 import graph.graph;
-/*********************************************************
+/***************************************************************
+ * Classe Abstrata para os Eventos
  * 
  * @author Grupo 11
  *
- *********************************************************/
+ *<p> Classe Abstrata para Eventos. Tem um campo para a formiga 
+ *associada e outro para o tempo em que devemos executar o evento.
+ *Existem 2 campos estáticos. O primeiro é um objeto aleatório para 
+ *gerar números aleatórios e o outro é um comparador de eventos que 
+ *é usado quando queremos adicionar eventos ao PEC. Os métodos 
+ *Execute Event e toString devem ser substituídos.
+ ****************************************************************/
 public abstract class Event implements InterfaceEvent {
 	/* ==== ATRIBUTOS ==== */
-	/** **/
+	/** tempo em que devemos executar o evento **/
 	protected double time_stamp;
-	/** **/
+	/** formiga em que devemos executar o evento  **/
 	protected final Ant ant;
-	/** **/
+	/** número aleatório gerado **/
 	private static Random r = new Random();
-	/** **/
+	/** comparador de eventos **/
 	public static EventComparator ec = new EventComparator();
 
 	/* ==== CONSTRUTORES ==== */
@@ -65,17 +72,27 @@ public abstract class Event implements InterfaceEvent {
 	}
 
 	
-	/** @return ant **/
+	/*********************************************************
+	 *  Getter da Formiga associada ao evento
+	 *  @return ant - uma certa formiga associada a um evento
+	 ********************************************************/
 	public Ant getAnt()
 	{
 		return ant;
 	}
-	/** @return time_stamp **/
+	/********************************************************
+	 *	Getter de o tempo considerando um certo evento
+	 * @return time_stamp 
+	 * 
+	 ********************************************************/
     public double getTime() 
     {
     	return time_stamp;
     }
-    /** @param ts ira ser armazenado **/
+    /********************************************************
+     * Armazenar o tempo
+     * @param ts ira ser armazenado 
+     *******************************************************/
     public void setTime(double ts) 
     {
     	time_stamp = ts;

@@ -12,8 +12,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import discreteStochaticSim.Evaporation;
 import discreteStochaticSim.Event;
+import discreteStochaticSim.EventControlPrints;
 import discreteStochaticSim.InterfacePec;
+import discreteStochaticSim.Move;
 import discreteStochaticSim.PriorityQueuePec;
 
 
@@ -29,7 +32,7 @@ public class StochasticOptimProb implements OptProblem {
 	
 	/* =========== ATRIBUTOS ============ */
 	/** parâmetros armazenados sobre o problema a resolver **/
-	Parameters p;
+	public Parameters p;
 	
 	/*1.parametros relacionados com o tempo*/
 	/** tempo de controlo que corresponde ao quociente entre o instante final e 20 **/
@@ -51,7 +54,7 @@ public class StochasticOptimProb implements OptProblem {
 	/** Lista das Formigas  **/
 	private final List<Ant> list_ants;
 	/** Lista ligada dos ciclos hamiltonianos */
-	LinkedList <HCResults> hamcycle = new LinkedList<HCResults>();
+	public LinkedList <HCResults> hamcycle = new LinkedList<HCResults>();
 	/** Ciclo hamiltoniano **/
 	HamiltonianCycle<Integer,Integer> hC;
 	

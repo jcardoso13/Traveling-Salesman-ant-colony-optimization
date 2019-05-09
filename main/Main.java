@@ -18,8 +18,17 @@ package main;
 import antColony.OptProblem;
 import antColony.StochasticOptimProb;
 
+/*************************************************************************
+ * Classe Main - testaa o programa recorrendo a um argumento
+ * de entrada que corresponde ao xml com os parametros de entrada
+ *
+ * @author Grupo 11
+ *
+ *************************************************************************/
 public class Main {
-
+	
+	/** Problema Optimizado **/
+	public static OptProblem opt;
 	/*************************************************************************
 	 * Main - metodo usado para testar o programa so precisa de um argumento
 	 * de entrada que corresponde ao xml com os parametros de entrada
@@ -38,7 +47,7 @@ public class Main {
 		
 	
 		/* 2 - Criacao de uma nova otimizacao do problema  */
-		OptProblem opt = new StochasticOptimProb();
+		opt = new StochasticOptimProb();
 		
 		/* 3 - Execucao do referido problema de otimizacao. A analise, inicializacao e execucao sao feitos */
 		opt.runOptimizationProb(args[0]);

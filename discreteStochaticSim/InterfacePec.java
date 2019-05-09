@@ -48,6 +48,7 @@ public interface InterfacePec<T> {
     public String toString();
 	/**********************************************************************************************
 	 * toStringOrdered -- metodo que imprime o PEC ordenada de acordo com a ordem dos elementos. 
+	 * @return string da PEC ordenada 
 	 **********************************************************************************************/
     public String toStringOrdered(); 
 

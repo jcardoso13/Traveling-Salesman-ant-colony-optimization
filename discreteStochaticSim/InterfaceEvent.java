@@ -16,6 +16,14 @@ import graph.graph;
 
 public interface InterfaceEvent{
 	
+	/***************************************************************************************
+	 * Este método é a redefinição do método do Event geral com o mesmo nome.
+	 *  
+	 * 
+	 * @param opp -- Problema de Optimização com os dados todos a analisar  
+	 * @param gr -- grafo do problema a optimizar
+	 * @param hc -- ciclo hamiltoniano
+	 **************************************************************************************/
 	public abstract void ExecutaEvent(OptProblem opp,graph<Integer,Integer> gr,HamiltonianCycle<Integer,Integer> hc);
 
 }

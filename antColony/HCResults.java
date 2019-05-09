@@ -16,7 +16,7 @@ public class HCResults {
 	/** **/
 	LinkedList<Integer> path;
 	/** **/
-	int costTotal;
+	public int costTotal;
 
 	@SuppressWarnings("unchecked")
 	/*************************************************

@@ -50,7 +50,7 @@ public class Ant {
 
 	/********************************************
 	 * Armazenamento (setter) do caminho da formiga
-	 * @param p -  path (caminho) da formiga
+	 * @param path -  path (caminho) da formiga
 	 ********************************************/
 	public void setP(LinkedList<pathw> path) {
 		p = path;

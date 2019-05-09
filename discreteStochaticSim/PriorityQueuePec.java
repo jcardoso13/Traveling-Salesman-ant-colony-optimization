@@ -22,7 +22,20 @@ import java.util.PriorityQueue;
 public class PriorityQueuePec<T extends InterfaceEvent> implements InterfacePec<T> {
 
 	/* ==== ATRIBUTOS ==== */
+	/** 
+	 * Uma fila de prioridade ilimitada baseada em um heap de 
+	 * prioridade. Os elementos da fila de prioridade são ordenados
+	 * de acordo com sua ordenação natural ou por um Comparador 
+	 * fornecido no tempo de construção da fila, dependendo de qual
+	 * construtor está sendo utilizado. Uma fila de prioridade não
+	 * permite elementos nulos. Uma fila de prioridade que depende
+	 * de ordenação natural também não permite a inserção de objetos
+	 * não comparáveis (isso pode resultar em ClassCastException).
+	 ***/
 	private PriorityQueue<T> element_queue;
+	/***********************************************
+	 * o numero de elementos queue na Pec
+	 ***********************************************/
 	private int numbElements;
 	
 	/* ==== CONSTRUTOR ==== */
@@ -97,6 +110,7 @@ public class PriorityQueuePec<T extends InterfaceEvent> implements InterfacePec<
 	
 	/**********************************************************************************************
 	 * toStringOrdered -- metodo que imprime o PEC ordenada de acordo com a ordem dos elementos. 
+     * @return string da PEC ordenada
 	 **********************************************************************************************/
 	public String toStringOrdered() 
 	{
