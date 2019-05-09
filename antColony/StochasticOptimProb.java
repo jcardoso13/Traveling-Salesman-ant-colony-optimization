@@ -78,21 +78,24 @@ public class StochasticOptimProb implements OptProblem {
 			{
 				p.setActual_time(ev.getTime()); // Avanco rapido ate a hora de executa-lo
 				//System.out.println(actual_time);
-				if (ev.getClass() == Move.class)
+				//if (ev.getClass() == Move.class)
+				if(ev instanceof Move)
 				{
 					this.set_mevent(this.get_mevent()+1);
 					//System.out.println();
 					//System.out.println("mmevent = " + mevent);
 					
 				}
-				else if (ev.getClass() == Evaporation.class)
+				//else if (ev.getClass() == Evaporation.class)
+				else if(ev instanceof Evaporation)
 				{
 					this.set_eevent(this.get_eevent()+1);
 					//System.out.println(actual_time);
 					//System.out.println();
 					//System.out.println("eevent = "+ eevent);
 				}
-				else if(ev.getClass() == EventControlPrints.class)
+				//else if(ev.getClass() == EventControlPrints.class)
+				else if(ev instanceof EventControlPrints)
 				{
 					//System.out.println(Gr.getG().get(2));
 				}
@@ -109,7 +112,7 @@ public class StochasticOptimProb implements OptProblem {
 	
 	public void runOptimizationProb(String filename) {
 		readXML(filename);
-		System.out.println(p.Gr); hC = new HamiltonianCycle<Integer,Integer>(p.getAlpha(),p.getBeta(),p.Gr);
+		hC = new HamiltonianCycle<Integer,Integer>(p.getAlpha(),p.getBeta(),p.Gr);
 		p.setActual_time(0); ctrl_time = p.getFinalinst()/20;
 		  
 		//Adiciona as impressoes do controlo de Evento ao PEC 
@@ -144,7 +147,6 @@ public class StochasticOptimProb implements OptProblem {
     		Element element;
     		element = (Element)root;
     		p.setFinalinst(Double.parseDouble(element.getAttribute("finalinst")));
-    		System.out.println(p.getFinalinst());
     		p.setPlevel(Double.parseDouble(element.getAttribute("plevel")));
     		p.setAntcolsize(Integer.parseInt(element.getAttribute("antcolsize")));
     		

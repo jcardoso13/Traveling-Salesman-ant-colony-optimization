@@ -1,4 +1,4 @@
-<simulation finalinst="-300" antcolsize="-3" plevel="0.5">
+<simulation finalinst="-300" antcolsize="-200" plevel="0.5">
 	<graph nbnodes="5" nestnode="1">
 		<node nodeidx="1">
 			<weight targetnode="2">3</weight>
