@@ -1,6 +1,6 @@
 /*********************************************************************
- * Este package implementa o container do evento pendente. discreteStochasticSim também oferece uma interface caso outros pecs 
- * sejam necessários.
+ * Este package implementa o container do evento pendente. discreteStochasticSim tambem oferece uma interface caso outros pecs 
+ * sejam necessarios.
  * 
  * @author Grupo 11
  *

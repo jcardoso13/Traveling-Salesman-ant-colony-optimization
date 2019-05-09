@@ -44,7 +44,7 @@ public class Vertex<T,E>{
 	// Getter do Nome da Node, (diferente da posicao no vetor!)
 	/***********************************************************
 	 * Getter do Nome da Node
-	 * NOTA= Não é o mesmo que a posicao no vetor!)
+	 * NOTA= Nao e o mesmo que a posicao no vetor!)
 	 * @return
 	 ***********************************************************/
 	public T getLabel() {

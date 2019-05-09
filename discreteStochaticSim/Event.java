@@ -13,10 +13,10 @@ import graph.graph;
  *
  *<p> Classe Abstrata para Eventos. Tem um campo para a formiga 
  *associada e outro para o tempo em que devemos executar o evento.
- *Existem 2 campos estáticos. O primeiro é um objeto aleatório para 
- *gerar números aleatórios e o outro é um comparador de eventos que 
- *é usado quando queremos adicionar eventos ao PEC. Os métodos 
- *Execute Event e toString devem ser substituídos.
+ *Existem 2 campos estaticos. O primeiro e um objeto aleatorio para 
+ *gerar numeros aleatorios e o outro e um comparador de eventos que 
+ *e usado quando queremos adicionar eventos ao PEC. Os metodos 
+ *Execute Event e toString devem ser substituidos.
  ****************************************************************/
 public abstract class Event implements InterfaceEvent {
 	/* ==== ATRIBUTOS ==== */
@@ -24,7 +24,7 @@ public abstract class Event implements InterfaceEvent {
 	protected double time_stamp;
 	/** formiga em que devemos executar o evento  **/
 	protected final Ant ant;
-	/** número aleatório gerado **/
+	/** numero aleatorio gerado **/
 	private static Random r = new Random();
 	/** comparador de eventos **/
 	public static EventComparator ec = new EventComparator();

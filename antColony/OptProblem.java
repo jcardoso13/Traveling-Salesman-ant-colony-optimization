@@ -2,13 +2,13 @@ package antColony;
 
 
 /**********************************************************************
- *  Interface para a otimização do Problema.
+ *  Interface para a otimizacao do Problema.
  * 
  * 
  * @author Grupo 11
  * 
- *  <p>OptProblem é usado no <code>Main</code> e permite fornecer 
- *  implementções alternativas de problemas de otimizacao. 
+ *  <p>OptProblem e usado no <code>Main</code> e permite fornecer 
+ *  implementcoes alternativas de problemas de otimizacao. 
  *
  *********************************************************************/
 
@@ -16,16 +16,16 @@ package antColony;
 public interface OptProblem {
 	
 	/*****************************************************************************************************
-	 * Este método é responsável por executar a simulação por si mesma.
+	 * Este metodo e responsavel por executar a simulacao por si mesma.
 	 *****************************************************************************************************/
 	 void simulacao();
 	 
 	/******************************************************************************************************
-	 * Este método é todo o problema num.Ele deve abrir o arquivo especificado nos argumentos, 
-	 * analisá-lo adequadamente, inicializar o problema de otimização e, em seguida, chamar o método
-	 * de simulação.
+	 * Este metodo e todo o problema num.Ele deve abrir o arquivo especificado nos argumentos, 
+	 * analisa-lo adequadamente, inicializar o problema de otimizacao e, em seguida, chamar o metodo
+	 * de simulacao.
 	 * 
-	 * @param filename é o nome do arquivo que contém o teste.
+	 * @param filename e o nome do arquivo que contem o teste.
 	 ******************************************************************************************************/
 	 public void runOptimizationProb(String filename);
 	 

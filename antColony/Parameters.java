@@ -3,9 +3,9 @@ package antColony;
 import graph.graph;
 
 /*********************************************************
- * Nesta classe é possível encontrar os parâmetros que são
- * extraídos do ficheiro .xml para posterior resolução do 
- * problema de optimização.
+ * Nesta classe e possivel encontrar os parametros que sao
+ * extraidos do ficheiro .xml para posterior resolucao do 
+ * problema de optimizacao.
  * 
  * 
  * @author Grupo 11
@@ -15,35 +15,35 @@ import graph.graph;
 public class Parameters {
 	
 	/*1.parametros relacionados com o tempo*/
-	/** Instante Final com que a simulação termina **/
+	/** Instante Final com que a simulacao termina **/
 	private double finalinst;
 	/** Instante Atual **/
 	private double actual_time;
 
 	/*2.parametros relacionados com evento*/
-	/** Parâmetro relacionado com o evento de movimento das formigas **/
+	/** Parametro relacionado com o evento de movimento das formigas **/
 	private double alpha;
-	/** Parâmetro relacionado com o evento de movimento das formigas **/
+	/** Parametro relacionado com o evento de movimento das formigas **/
 	private double beta;
-	/** Parâmetro relacionado com o evento de movimento das formigas **/
+	/** Parametro relacionado com o evento de movimento das formigas **/
 	private double delta;
-	/** Parâmetro relacionado com o evento da evaporação das feromonas **/
+	/** Parametro relacionado com o evento da evaporacao das feromonas **/
 	private double eta;
-	/** Parâmetro relacionado com o evento da evaporação das feromonas **/
+	/** Parametro relacionado com o evento da evaporacao das feromonas **/
 	private double rho;
 
 	/*3.parametros relacionados com formiga*/
-	/** Nível das Feromonas **/
+	/** Nivel das Feromonas **/
 	private double plevel;
-	/** Dimensão da Colónia das Formigas **/
+	/** Dimensao da Colonia das Formigas **/
 	private int antcolsize;
 	
 	/*4. parametros relacionados com o grafo*/
 	/** Grafo do problema a otimizar  **/
 	graph<Integer,Integer> Gr = new graph<Integer,Integer>();
-	/** Número de Nós no grafo a implementar **/
+	/** Numero de Nos no grafo a implementar **/
 	private int nbnodes;
-	/** Nó inicial, isto é, aquele que as formigas consideram como ponto de partida **/
+	/** No inicial, isto e, aquele que as formigas consideram como ponto de partida **/
 	private int nestnode;
 
 	
@@ -59,7 +59,7 @@ public class Parameters {
 
 	/******************************************************
 	 * Setter do Instante Final
-	 * @param finalTime - armazenar o parâmetro
+	 * @param finalTime - armazenar o parametro
 	 ******************************************************/
 	public void setFinalinst(double finalTime) {
 		finalinst = finalTime;
@@ -82,7 +82,7 @@ public class Parameters {
         actual_time = aT;
     }
 	/*****************************************************
-	 * Setter dos Parâmetros do Movimento
+	 * Setter dos Parametros do Movimento
 	 * @param a -- alpha
 	 * @param b -- beta
 	 * @param d -- delta
@@ -119,9 +119,9 @@ public class Parameters {
     	return delta;
     }   
     /********************************************************
-     * Setter dos parâmetros de evaporação das feromonas
+     * Setter dos parametros de evaporacao das feromonas
      * @param e -- eta
-     * @param r -- ró
+     * @param r -- ro
      ********************************************************/
     public void setEvapParam(double e, double r) 
     {
@@ -130,7 +130,7 @@ public class Parameters {
     }
     /********************************************************
      * Getter do Eta
-     * @return eta - parametro relacionado com o evaporação
+     * @return eta - parametro relacionado com o evaporacao
      *******************************************************/
     public double getEtha() 
     {
@@ -138,7 +138,7 @@ public class Parameters {
     }
     /********************************************************
      * Getter do Ro
-     * @return rho - parametro relacionado com a evaporação
+     * @return rho - parametro relacionado com a evaporacao
      *******************************************************/
     public double getRho() 
     {
@@ -146,8 +146,8 @@ public class Parameters {
     }
     
     /********************************************************
-     * Getter do nível de feromonas 
-     * @return plevel - parametro relacionado com o nível das 
+     * Getter do nivel de feromonas 
+     * @return plevel - parametro relacionado com o nivel das 
      * feromonas
      *******************************************************/
     public double getPlevel() 
@@ -155,8 +155,8 @@ public class Parameters {
 		return plevel;
 	}
     /********************************************************
-     * Armzenamento do nível das feromonas
-     * @param pL -- nível das feromonas
+     * Armzenamento do nivel das feromonas
+     * @param pL -- nivel das feromonas
      * 
      ********************************************************/
 	public void setPlevel(double pL) 
@@ -164,16 +164,16 @@ public class Parameters {
 		plevel = pL;
 	}
     /********************************************************
-     * Getter da dimensão da colónia de formigas
-     * @return antcolsize - dimensão da colónia de formigas
+     * Getter da dimensao da colonia de formigas
+     * @return antcolsize - dimensao da colonia de formigas
      *******************************************************/
 	public int getAntcolsize() 
 	{
 		return antcolsize;
 	}
 	/******************************************************
-	 * Armazenamento da dimensão da colónia de formigas
-	 * @param antsize -- dimensão da colónia de formigas
+	 * Armazenamento da dimensao da colonia de formigas
+	 * @param antsize -- dimensao da colonia de formigas
 	 ******************************************************/
 	public void setAntcolsize(int antsize)
 	{
@@ -182,32 +182,32 @@ public class Parameters {
 	
 	
     /********************************************************
-     * Getter do número de nós no grafo 
-     * @return nbnodes - número total de nós do grafo
+     * Getter do numero de nos no grafo 
+     * @return nbnodes - numero total de nos do grafo
      *******************************************************/
     public int getNbnodes() 
     {
 		return nbnodes;
 	}
     /************************************************************
-     * Armazenamento do número total de nós
-     * @param totalnode -- armazena o número total de nós 
+     * Armazenamento do numero total de nos
+     * @param totalnode -- armazena o numero total de nos 
      ***********************************************************/
 	public void setNbnodes(int totalnode) 
 	{
 		nbnodes = totalnode;
 	}
 	/**********************************************************
-	 * Getter do nó inicial que as formigas irão começar para 
+	 * Getter do no inicial que as formigas irao comecar para 
 	 * criar o caminho
-	 * @return nestnode -- nó inicial para começar o path
+	 * @return nestnode -- no inicial para comecar o path
 	 **********************************************************/
 	public int getNestnode() 
 	{
 		return nestnode;
 	}
 	/*********************************************************** 
-	 * Armazenamento do nó inicial 
+	 * Armazenamento do no inicial 
 	 * @param nnode --- armazena o nestnode 
 	 **********************************************************/
 	public void setNestnode(int nnode) 

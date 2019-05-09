@@ -17,10 +17,10 @@ import graph.graph;
 public interface InterfaceEvent{
 	
 	/***************************************************************************************
-	 * Este método é a redefinição do método do Event geral com o mesmo nome.
+	 * Este metodo e a redefinicao do metodo do Event geral com o mesmo nome.
 	 *  
 	 * 
-	 * @param opp -- Problema de Optimização com os dados todos a analisar  
+	 * @param opp -- Problema de Optimizacao com os dados todos a analisar  
 	 * @param gr -- grafo do problema a optimizar
 	 * @param hc -- ciclo hamiltoniano
 	 **************************************************************************************/

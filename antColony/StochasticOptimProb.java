@@ -21,7 +21,7 @@ import discreteStochaticSim.PriorityQueuePec;
 
 
 /**************************************************************************************************************
- *  Classe da Otimizacao do Problema.É importante salientar que existem 4 atributos que nao são estáticos:
+ *  Classe da Otimizacao do Problema.E importante salientar que existem 4 atributos que nao sao estaticos:
  *  relacionados com o tempo, grafo, evento, formiga.
  *  
  * @author Grupo 11
@@ -31,7 +31,7 @@ import discreteStochaticSim.PriorityQueuePec;
 public class StochasticOptimProb implements OptProblem {
 	
 	/* =========== ATRIBUTOS ============ */
-	/** parâmetros armazenados sobre o problema a resolver **/
+	/** parametros armazenados sobre o problema a resolver **/
 	public Parameters p;
 	
 	/*1.parametros relacionados com o tempo*/
@@ -39,15 +39,15 @@ public class StochasticOptimProb implements OptProblem {
 	private double ctrl_time; 
 	
 	/*2.parametros relacionados com evento*/
-	/** número de observações que irão ser imprimidas **/
+	/** numero de observacoes que irao ser imprimidas **/
 	private int numControlPrint ;
-	/** número de eventos de movimento **/
+	/** numero de eventos de movimento **/
 	private int mevent = 0 ;
-	/**número de eventos de evaporação **/
+	/**numero de eventos de evaporacao **/
 	private int eevent = 0;
 	/** Interface relativa a PEC **/
 	private InterfacePec<Event> pec;
-	/** número de Controlo para imprimir as observações **/
+	/** numero de Controlo para imprimir as observacoes **/
 	private static int numero_controlo = 20;
 	
 	/*3.parametros relacionados com formiga*/
@@ -67,8 +67,8 @@ public class StochasticOptimProb implements OptProblem {
 
 	/* =========== CONSTRUTOR ============ */
     /************************************************************
-     * Construtor sem argumentos para o problema de otimização. 
-     * Tudo o que faz é criar as listas vazias que serão usadas.
+     * Construtor sem argumentos para o problema de otimizacao. 
+     * Tudo o que faz e criar as listas vazias que serao usadas.
      ************************************************************/
 	public StochasticOptimProb() 
 	{
@@ -79,10 +79,10 @@ public class StochasticOptimProb implements OptProblem {
 
 	/* ========= METODOS ============= */
 	/************************************************************
-	 * Método que simula o movimento das formigas pelo grafo para
+	 * Metodo que simula o movimento das formigas pelo grafo para
 	 * encontrar o ciclo hamiltoniano e regressam ao no inicial.
 	 * E voltam a percorrer novamente o grafo para encontrar um novo 
-	 * ciclo hamiltoniano, tudo isto tendo em conta a evaporação das
+	 * ciclo hamiltoniano, tudo isto tendo em conta a evaporacao das
 	 * feromonas nas arestas.
 	 ***********************************************************/
 	public void simulacao() {
@@ -131,11 +131,11 @@ public class StochasticOptimProb implements OptProblem {
 	}
 	
 	/******************************************************************************************************
-	 * Este método é todo o problema num.Ele deve abrir o arquivo especificado nos argumentos, 
-	 * analisá-lo adequadamente, inicializar o problema de otimização e, em seguida, chamar o mï¿½todo
-	 * de simulação.
+	 * Este metodo e todo o problema num.Ele deve abrir o arquivo especificado nos argumentos, 
+	 * analisa-lo adequadamente, inicializar o problema de otimizacao e, em seguida, chamar o metodo
+	 * de simulacao.
 	 * 
-	 * @param filename é o nome do arquivo que contém o teste.
+	 * @param filename e o nome do arquivo que contem o teste.
 	 ******************************************************************************************************/
 	public void runOptimizationProb(String filename) {
 		readXML(filename);
@@ -163,8 +163,8 @@ public class StochasticOptimProb implements OptProblem {
 	
 	
 	/****************************************************************
-	 * Método para leitura de um ficheiro XML recorrendo Document Object Model
-	 * que cria uma árvore que representa todo o documento.
+	 * Metodo para leitura de um ficheiro XML recorrendo Document Object Model
+	 * que cria uma arvore que representa todo o documento.
 	 * 
 	 * @param filename -- ficheiro de teste, test_i, com i =1,...5
 	 * 
@@ -331,16 +331,16 @@ public class StochasticOptimProb implements OptProblem {
 	}	
 	
     /****************************************************************************
-     * Getter do numero de observações que irão ser imprimidas
-     * @return numControlPrint - numero de observações que irao ser imprimidas
+     * Getter do numero de observacoes que irao ser imprimidas
+     * @return numControlPrint - numero de observacoes que irao ser imprimidas
      **************************************************************************/
     public int getNumControlPrint() 
     {
         return numControlPrint;
     }
     /***************************************************************
-     * Armazenamento do numero de observacoes que estão a ser imprimidas
-     * @param numCP - numero de observações impressas
+     * Armazenamento do numero de observacoes que estao a ser imprimidas
+     * @param numCP - numero de observacoes impressas
      **************************************************************/
     public void setNumControlPrint(int numCP) 
     {
@@ -348,7 +348,7 @@ public class StochasticOptimProb implements OptProblem {
     }
 
     /***************************************************************
-     * Armazenamento do número de eventos move
+     * Armazenamento do numero de eventos move
      *  @param mev -- numero de move events 
      **************************************************************/
     public void set_mevent(int mev)
@@ -356,9 +356,9 @@ public class StochasticOptimProb implements OptProblem {
     	mevent = mev;
     }  
     /**************************************************************
-     * Getter do número de eventos move
+     * Getter do numero de eventos move
      * 
-     * @return mmevent  -- número de move events
+     * @return mmevent  -- numero de move events
      **************************************************************/
     public int get_mevent()
     {
@@ -373,8 +373,8 @@ public class StochasticOptimProb implements OptProblem {
     	eevent = eev;
     }  
     /************************************************************
-     *  Getter do número de eventos evaporação
-     *  @return o eevent -- numero de eventos evaporação
+     *  Getter do numero de eventos evaporacao
+     *  @return o eevent -- numero de eventos evaporacao
      ***********************************************************/
     public int get_eevent()
     {

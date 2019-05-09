@@ -8,15 +8,15 @@ import graph.Edge;
 import graph.graph;
 
 /**********************************************************************************
- *  Evaporação das Feromonas 
+ *  Evaporacao das Feromonas 
  * 
  * 
  * 
  * @author Grupo 11
  *
- * <p> Esta subclasse é uma extensão da classe Event abstrata e manipulará
- * os eventos de Evaporação. Herda o tempo, mas no entanto não é necessário
- * saber o indíviduo (ant), pelo que é definido a null, para que haja evaporação das feromonas. 
+ * <p> Esta subclasse e uma extensao da classe Event abstrata e manipulara
+ * os eventos de Evaporacao. Herda o tempo, mas no entanto nao e necessario
+ * saber o individuo (ant), pelo que e definido a null, para que haja evaporacao das feromonas. 
  *****************************************************************************************/
 
 public class Evaporation extends Event{
@@ -26,18 +26,18 @@ public class Evaporation extends Event{
 	double quantidade;
 	/** aresta considerando um sentido **/
 	Edge<Integer,Integer> edge1;
-	/** aresta considerando o sentido contrário **/
+	/** aresta considerando o sentido contrario **/
 	Edge<Integer,Integer> edge2;
 	
 	/* ==== CONSTRUTOR ==== */
 	/********************************************************************
-	 * Este é o construtor. O que ele faz é chamar o construtor da super
-	 * classe com os argumentos indicados. Ant é sempre null uma vez que
-	 * não fazemos "target" a uma formiga em específico.
+	 * Este e o construtor. O que ele faz e chamar o construtor da super
+	 * classe com os argumentos indicados. Ant e sempre null uma vez que
+	 * nao fazemos "target" a uma formiga em especifico.
 	 * 
 	 * @param t - instanto em que queremos evaporar as feromonas
-	 * @param a - formiga, no entanto colocámos a null
-	 * @param quant - quantidade de feromonas que irá sendo atualizada
+	 * @param a - formiga, no entanto colocamos a null
+	 * @param quant - quantidade de feromonas que ira sendo atualizada
 	 * @param ed1 - edge considerando um sentido 
 	 * @param ed2 - edge considerando o sentido oposto 
 	 *********************************************************************/
@@ -52,12 +52,12 @@ public class Evaporation extends Event{
 	
 	/* ==== METODOS ==== */
 	/**************************************************************************
-	 * ExecutaEvent -- Este método é uma redefinição do método geral de evento 
+	 * ExecutaEvent -- Este metodo e uma redefinicao do metodo geral de evento 
 	 * com o mesmo nome. Neste caso queremos ir atualizando a quantidade de
 	 * feromonas nas arestas do grafo e adicionar ao pec o novo evento para a 
-	 * evaporação da feromona.
+	 * evaporacao da feromona.
 	 * 
-	 * @param opp -- Problema de Optimização com os dados todos a analisar  
+	 * @param opp -- Problema de Optimizacao com os dados todos a analisar  
 	 * @param gr -- grafo do problema a optimizar
 	 * @param hc -- ciclo hamiltoniano
 	 **************************************************************************/

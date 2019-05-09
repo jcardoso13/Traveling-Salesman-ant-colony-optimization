@@ -5,10 +5,10 @@ import java.util.LinkedList;
 
 
 /***********************************************************************************************
- * Esta é a classe para as formigas.Cada formiga deve ter associada a si um caminho (path), o total 
+ * Esta e a classe para as formigas.Cada formiga deve ter associada a si um caminho (path), o total 
  * do custo do seu caminho.
- * Um agente mantém uma lista: - uma lista de histórico para acompanhar o caminho que cobriu 
- * até agora;
+ * Um agente mantem uma lista: - uma lista de historico para acompanhar o caminho que cobriu 
+ * ate agora;
  * @author Grupo 11
  *
  **********************************************************************************************/
@@ -25,8 +25,8 @@ public class Ant {
 	
 	/* ===== CONSTRUTOR ===== */
 	/***************************************************************
-	 * Construtor cujo objetivo é criar um objeto formiga com o seu
-	 * caminho a começar no nestnode -- ponto de partida.
+	 * Construtor cujo objetivo e criar um objeto formiga com o seu
+	 * caminho a comecar no nestnode -- ponto de partida.
 	 * 
 	 * @param nest Ponto de Partida no grafo
 	 **************************************************************/
@@ -41,7 +41,7 @@ public class Ant {
 	/* ===== METODOS ==== */
 	/**********************************************
 	 * Getter do caminho da formiga pelo grafo
-	 * já considerando os custos.
+	 * ja considerando os custos.
 	 * @return p - path (caminho) da formiga 
 	 **********************************************/
 	public LinkedList<pathw> getP() {

@@ -16,8 +16,8 @@ import graph.*;
  * 
 
  * @author Grupo 11
- * <p> Esta subclasse é uma extensão da classe Event abstrata e manipulará os eventos de movimento
- * das formigas. Herda o tempo e também a formiga em específico que se irá mover.
+ * <p> Esta subclasse e uma extensao da classe Event abstrata e manipulara os eventos de movimento
+ * das formigas. Herda o tempo e tambem a formiga em especifico que se ira mover.
  ***********************************************************************************************/
 public class Move extends Event {
 
@@ -39,13 +39,13 @@ public class Move extends Event {
 	/* ==== METODOS ==== */
 
 	/***************************************************************************************
-	 * Este método é a redefinição do método do Event geral com o mesmo nome.
+	 * Este metodo e a redefinicao do metodo do Event geral com o mesmo nome.
 	 *  
-	 * Neste caso em particular podemos mover a formiga no evento para nodes válidos. 
+	 * Neste caso em particular podemos mover a formiga no evento para nodes validos. 
 	 * Precisamos de verificar por ciclos.
 	 * 
 	 * 
-	 * @param opp -- Problema de Optimização com os dados todos a analisar  
+	 * @param opp -- Problema de Optimizacao com os dados todos a analisar  
 	 * @param gr -- grafo do problema a optimizar
 	 * @param hC -- ciclo hamiltoniano
 	 **************************************************************************************/
@@ -137,7 +137,7 @@ public class Move extends Event {
 	}
 
 	/*****************************************************************************
-	 * toString método que substitui aquele com o mesmo nome na superclasse Object.
+	 * toString metodo que substitui aquele com o mesmo nome na superclasse Object.
 	 ****************************************************************************/
 	public String toString() {
 		return ("(Type:Move,Time"+ this.getTime()+ ")");
