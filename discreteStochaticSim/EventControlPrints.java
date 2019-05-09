@@ -66,7 +66,7 @@ public class EventControlPrints extends Event {
         System.out.printf(formato2, "Number of evaporation events: ",op.get_eevent());
         System.out.println("\t\t");
         opt=op.findOpt();
-        System.out.print("Hamiltonian cycle: " + opt);
+        System.out.print(opt.getPath());
         System.out.println();
 	}
 

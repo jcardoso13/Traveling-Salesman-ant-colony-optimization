@@ -9,6 +9,8 @@ import graph.*;
 /*******************************************************************************
  * 
  * @author Grupo 11
+ * 
+ * Class that has the methods and values needed to find the path for the Ant
  *
  * @param <T>
  * @param <E>
@@ -27,9 +29,12 @@ public class HamiltonianCycle<T,E> {
 	/* ==== CONSTRUTOR ==== */
 	/*********************************************************************
 	 * 
-	 * @param A
-	 * @param b
-	 * @param g
+	 * Initiation of the Class with the problem's data
+	 * Functions as a "init"
+	 * 
+	 * @param Alpha
+	 * @param Beta
+	 * @param graph
 	 * 
 	 *********************************************************************/
 	HamiltonianCycle(double A,double b,graph<T,E> g)
@@ -44,10 +49,13 @@ public class HamiltonianCycle<T,E> {
 
 	/**********************************************************************
 	 * 
+	 * The algorithm that receives an Ant as a parameter and finds the next Vertex
+	 * and updates it's path based on the specifications of the project
+	 * Also updates the PEC with the needed Evaporation and Move events
 	 * 
 	 * 
 	 * @param ant
-	 * @return
+	 * @return updated ant
 	 *
 	 **********************************************************************/
 	public Ant GetNextMove(Ant ant) 
@@ -143,13 +151,13 @@ public class HamiltonianCycle<T,E> {
 	}
 	
 	/*****************************************************************************
-	 * Calc_Coef --
+	 * Calc_Coef -- Calculates the edge coefficient
 	 * 
 	 * @param alpha
 	 * @param beta
 	 * @param phero
 	 * @param weight
-	 * @return
+	 * @return Coefficient
 	 *
 	 *****************************************************************************/
 	private double Calc_Coef(double alpha, double beta, double phero, E weight) 
@@ -160,11 +168,11 @@ public class HamiltonianCycle<T,E> {
 	}
 	
 	/********************************************************************************
-	 * random_decision -- 
+	 * random_decision -- Decides the Edge to be taken based on the Probability
 	 * 
-	 * @param prob
-	 * @param index
-	 * @return
+	 * @param prob vector
+	 * @param index (size of said vector)
+	 * @return index of edge
 	 * 
 	 *******************************************************************************/
 	private int random_decision(ArrayList<Double> prob,int index)
@@ -183,9 +191,9 @@ public class HamiltonianCycle<T,E> {
 	}
 	
 	/*******************************************************************************
-	 * 
-	 * @param weight
-	 * @return
+	 * Calculates the cost of the whole path
+	 * @param Weight List
+	 * @return Total Weight
 	 * 
 	 *******************************************************************************/
 	public int calculate_cost(LinkedList<Integer> weight)

@@ -3,7 +3,7 @@ package antColony;
 import java.util.LinkedList;
 
 /**************************************************************************
- * 
+ * HCResults is the class that stores a newly found unique path
  * 
  * 
  * 
@@ -21,7 +21,7 @@ public class HCResults {
 	@SuppressWarnings("unchecked")
 	/*************************************************
 	 * 
-	 * 
+	 * Copies the ant's path and total cost to this instance
 	 * 
 	 * @param p
 	 * @param cT
@@ -33,6 +33,7 @@ public class HCResults {
 	}
 	
 	/************************************************
+	 * 
 	 * @return 
 	 ***********************************************/
 	public String toString()
@@ -44,7 +45,7 @@ public class HCResults {
 	/****************************************************
 	 * 
 	 * 
-	 * 
+	 * hashCode method for equals
 	 * 
 	 ***************************************************/
 	public int hashCode() {
@@ -57,7 +58,7 @@ public class HCResults {
 
 	/**************************************************
 	 * 
-	 * 
+	 * Returns the path
 	 * 
 	 * @return
 	 **************************************************/
@@ -66,6 +67,7 @@ public class HCResults {
 	}
 
 	/**************************************************
+	 * Returns the total cost
 	 * @return
 	 *
 	 **************************************************/
@@ -75,7 +77,7 @@ public class HCResults {
 
 	/***************************************************
 	 * 
-	 * 
+	 * Equals method to check if it's unique or not
 	 * 
 	 **************************************************/
 	public boolean equals(Object obj) {
