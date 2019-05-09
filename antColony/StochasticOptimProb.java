@@ -18,7 +18,7 @@ import discreteStochaticSim.PriorityQueuePec;
 
 
 /**************************************************************************************************************
- *  Classe da Otimizacao do Problema.ï¿½ importante salientar que existem 4 atributos que nao sï¿½o estï¿½ticos:
+ *  Classe da Otimizacao do Problema.É importante salientar que existem 4 atributos que nao são estáticos:
  *  relacionados com o tempo, grafo, evento, formiga.
  *  
  * @author Grupo 11
@@ -28,7 +28,7 @@ import discreteStochaticSim.PriorityQueuePec;
 public class StochasticOptimProb implements OptProblem {
 	
 	/* =========== ATRIBUTOS ============ */
-	/** parï¿½metros armazenados sobre o problema a resolver **/
+	/** parâmetros armazenados sobre o problema a resolver **/
 	Parameters p;
 	
 	/*1.parametros relacionados com o tempo*/
@@ -36,21 +36,21 @@ public class StochasticOptimProb implements OptProblem {
 	private double ctrl_time; 
 	
 	/*2.parametros relacionados com evento*/
-	/** nï¿½mero de observaï¿½ï¿½es que irï¿½o ser imprimidas **/
+	/** número de observações que irão ser imprimidas **/
 	private int numControlPrint ;
-	/** nï¿½mero de eventos de movimento **/
+	/** número de eventos de movimento **/
 	private int mevent = 0 ;
-	/** nï¿½mero de eventos de evaporaï¿½ï¿½o **/
+	/**número de eventos de evaporação **/
 	private int eevent = 0;
 	/** Interface relativa a PEC **/
 	private InterfacePec<Event> pec;
-	/** Nï¿½mero de Controlo para imprimir as observaï¿½ï¿½es **/
+	/** número de Controlo para imprimir as observações **/
 	private static int numero_controlo = 20;
 	
 	/*3.parametros relacionados com formiga*/
 	/** Lista das Formigas  **/
 	private final List<Ant> list_ants;
-	/** *Lista ligada dos ciclos hamiltonianos */
+	/** Lista ligada dos ciclos hamiltonianos */
 	LinkedList <HCResults> hamcycle = new LinkedList<HCResults>();
 	/** Ciclo hamiltoniano **/
 	HamiltonianCycle<Integer,Integer> hC;
@@ -64,8 +64,8 @@ public class StochasticOptimProb implements OptProblem {
 
 	/* =========== CONSTRUTOR ============ */
     /************************************************************
-     * Construtor sem argumentos para o problema de otimizaï¿½ï¿½o. 
-     * Tudo o que faz ï¿½ criar as listas vazias que serï¿½o usadas.
+     * Construtor sem argumentos para o problema de otimização. 
+     * Tudo o que faz é criar as listas vazias que serão usadas.
      ************************************************************/
 	public StochasticOptimProb() 
 	{
@@ -76,10 +76,10 @@ public class StochasticOptimProb implements OptProblem {
 
 	/* ========= METODOS ============= */
 	/************************************************************
-	 * Mï¿½todo que simula o movimento das formigas pelo grafo para
+	 * Método que simula o movimento das formigas pelo grafo para
 	 * encontrar o ciclo hamiltoniano e regressam ao no inicial.
 	 * E voltam a percorrer novamente o grafo para encontrar um novo 
-	 * ciclo hamiltoniano, tudo isto tendo em conta a evaporaï¿½ï¿½o das
+	 * ciclo hamiltoniano, tudo isto tendo em conta a evaporação das
 	 * feromonas nas arestas.
 	 ***********************************************************/
 	public void simulacao() {
@@ -128,11 +128,11 @@ public class StochasticOptimProb implements OptProblem {
 	}
 	
 	/******************************************************************************************************
-	 * Este mï¿½todo ï¿½ todo o problema num.Ele deve abrir o arquivo especificado nos argumentos, 
-	 * analisï¿½-lo adequadamente, inicializar o problema de otimizaï¿½ï¿½o e, em seguida, chamar o mï¿½todo
-	 * de simulaï¿½ï¿½o.
+	 * Este método é todo o problema num.Ele deve abrir o arquivo especificado nos argumentos, 
+	 * analisá-lo adequadamente, inicializar o problema de otimização e, em seguida, chamar o mï¿½todo
+	 * de simulação.
 	 * 
-	 * @param filename ï¿½ o nome do arquivo que contï¿½m o teste.
+	 * @param filename é o nome do arquivo que contém o teste.
 	 ******************************************************************************************************/
 	public void runOptimizationProb(String filename) {
 		readXML(filename);
@@ -160,8 +160,8 @@ public class StochasticOptimProb implements OptProblem {
 	
 	
 	/****************************************************************
-	 * Mï¿½todo para leitura de um ficheiro XML recorrendo Document Object Model
-	 * que cria uma ï¿½rvore que representa todo o documento.
+	 * Método para leitura de um ficheiro XML recorrendo Document Object Model
+	 * que cria uma árvore que representa todo o documento.
 	 * 
 	 * @param filename -- ficheiro de teste, test_i, com i =1,...5
 	 * 
@@ -328,16 +328,16 @@ public class StochasticOptimProb implements OptProblem {
 	}	
 	
     /****************************************************************************
-     * Getter do numero de observaï¿½ï¿½es que irï¿½o ser imprimidas
-     * @return numControlPrint - numero de observaï¿½ï¿½es que irï¿½o ser imprimidas
+     * Getter do numero de observações que irão ser imprimidas
+     * @return numControlPrint - numero de observações que irao ser imprimidas
      **************************************************************************/
     public int getNumControlPrint() 
     {
         return numControlPrint;
     }
     /***************************************************************
-     * Armazenamento do nï¿½mero de observaï¿½ï¿½es que estï¿½o a ser imprimidas
-     * @param numCP - numero de observaï¿½ï¿½es impressas
+     * Armazenamento do numero de observacoes que estão a ser imprimidas
+     * @param numCP - numero de observações impressas
      **************************************************************/
     public void setNumControlPrint(int numCP) 
     {
@@ -345,7 +345,7 @@ public class StochasticOptimProb implements OptProblem {
     }
 
     /***************************************************************
-     * Armazenamento do nï¿½mero de eventos move
+     * Armazenamento do número de eventos move
      *  @param mev -- numero de move events 
      **************************************************************/
     public void set_mevent(int mev)
@@ -353,9 +353,9 @@ public class StochasticOptimProb implements OptProblem {
     	mevent = mev;
     }  
     /**************************************************************
-     * Getter do nï¿½mero de eventos move
+     * Getter do número de eventos move
      * 
-     * @return mmevent  -- nï¿½mero de move events
+     * @return mmevent  -- número de move events
      **************************************************************/
     public int get_mevent()
     {
@@ -370,8 +370,8 @@ public class StochasticOptimProb implements OptProblem {
     	eevent = eev;
     }  
     /************************************************************
-     *  Getter do nï¿½mero de eventos evaporaï¿½ï¿½o
-     *  @return o eevent -- numero de eventos evaporaï¿½ï¿½o 
+     *  Getter do número de eventos evaporação
+     *  @return o eevent -- numero de eventos evaporação
      ***********************************************************/
     public int get_eevent()
     {
@@ -406,7 +406,7 @@ public class StochasticOptimProb implements OptProblem {
 	 * Getter do peso total tendo em conta todas as arestas
 	 * 
 	 * @return wTotal - peso total do grafo para posteriores
-	 * 					cï¿½lculos
+	 * 					calculos
 	 *********************************************************/
 	public int getwTotal() 
 	{
@@ -414,7 +414,7 @@ public class StochasticOptimProb implements OptProblem {
 	}
 	/*********************************************************
 	 * Armazenamento do peso total considerando todas as arestas
-	 * @param wT - peso total do grafo para posteriores cï¿½lculos
+	 * @param wT - peso total do grafo para posteriores calculos
 	 ********************************************************/
 	public void setwTotal(int wT) 
 	{
