@@ -6,13 +6,20 @@ import antColony.Ant;
 import antColony.HamiltonianCycle;
 import antColony.OptProblem;
 import graph.graph;
-
+/*********************************************************
+ * 
+ * @author Grupo 11
+ *
+ *********************************************************/
 public abstract class Event implements InterfaceEvent {
 	/* ==== ATRIBUTOS ==== */
-	private double time_stamp;
-	private final Ant ant;
-
-	public static Random r = new Random();
+	/** **/
+	protected double time_stamp;
+	/** **/
+	protected final Ant ant;
+	/** **/
+	private static Random r = new Random();
+	/** **/
 	public static EventComparator ec = new EventComparator();
 
 	/* ==== CONSTRUTORES ==== */
@@ -31,9 +38,7 @@ public abstract class Event implements InterfaceEvent {
 		ant=a;
 	}
 
-	/* ==== METODOS ==== */
-	
-	
+	/* ==== METODOS ==== */	
 	/*****************************************************************************
 	 * Metodo abstrato da execucao do evento. Cada tipo de evento deve redefinir este 
 	 * metodo para fazer o que deve fazer.

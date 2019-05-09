@@ -12,7 +12,7 @@ import graph.graph;
  *
  *********************************************************/
 
-public class Parameters {
+class Parameters {
 	
 	/*1.parametros relacionados com o tempo*/
 	/** Instante Final com que a simulação termina **/
@@ -40,7 +40,7 @@ public class Parameters {
 	
 	/*4. parametros relacionados com o grafo*/
 	/** Grafo do problema a otimizar  **/
-	public graph<Integer,Integer> Gr = new graph<Integer,Integer>();
+	graph<Integer,Integer> Gr = new graph<Integer,Integer>();
 	/** Número de Nós no grafo a implementar **/
 	private int nbnodes;
 	/** Nó inicial, isto é, aquele que as formigas consideram como ponto de partida **/
