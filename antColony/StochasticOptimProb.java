@@ -109,22 +109,22 @@ public class StochasticOptimProb implements OptProblem {
 	
 	public void runOptimizationProb(String filename) {
 		readXML(filename);
+		System.out.println(p.Gr); hC = new HamiltonianCycle<Integer,Integer>(p.getAlpha(),p.getBeta(),p.Gr);
+		p.setActual_time(0); ctrl_time = p.getFinalinst()/20;
+		  
+		//Adiciona as impressoes do controlo de Evento ao PEC 
+		for (int i = 0; i < p.getAntcolsize(); i++) 
+		{ 
+			Ant a = new Ant(p.getNestnode());
+			getList_ants().add(a); getPec().addElement(new Move(0,a),Event.ec);
+		  
+		} 
 		
-		  System.out.println(p.Gr); hC = new
-		  HamiltonianCycle<Integer,Integer>(p.getAlpha(),p.getBeta(),p.Gr);
-		  p.setActual_time(0); ctrl_time = p.getFinalinst()/20;
-		  
-		  //Adiciona as impressoes do controlo de Evento ao PEC 
-		  for (int i = 0; i < p.getAntcolsize(); i++) 
-		  { 
-			  Ant a = new Ant(p.getNestnode());
-			  getList_ants().add(a); getPec().addElement(new Move(0,a),Event.ec);
-		  
-		  } for (int j = 0; j <= 20; j++ ) 
-		  {
-			  getPec().addElement(new EventControlPrints(ctrl_time*j+0.0000000001), Event.ec); 
-		  }
-		  this.simulacao();
+		for (int j = 0; j <= 20; j++ ) 
+		{
+			getPec().addElement(new EventControlPrints(ctrl_time*j+0.0000000001), Event.ec); 
+		}
+		this.simulacao();
 		 
 		//System.out.println(hamcycle);
 		//System.out.println(p.Gr);
@@ -132,7 +132,7 @@ public class StochasticOptimProb implements OptProblem {
 	}
 	
 	
-	
+		
 	private void readXML(String filename) 
     {
     	try
@@ -147,6 +147,16 @@ public class StochasticOptimProb implements OptProblem {
     		System.out.println(p.getFinalinst());
     		p.setPlevel(Double.parseDouble(element.getAttribute("plevel")));
     		p.setAntcolsize(Integer.parseInt(element.getAttribute("antcolsize")));
+    		
+    		if (p.getFinalinst()<0)
+    		{
+    			throw(new Exception("Parametro invalido FinalInst"));
+    		}
+    		
+    		if (p.getAntcolsize()<0)
+    		{
+    			throw(new Exception("Parametro invalido da dimensao da colonia de formigas"));
+    		}
     		
     		NodeList childNodes = root.getChildNodes();
     		NodeList nodesOfGraph = null, eventList=null;
@@ -171,6 +181,12 @@ public class StochasticOptimProb implements OptProblem {
     		element = (Element)graph;
     		p.setNbnodes(Integer.parseInt(element.getAttribute("nbnodes")));
     		p.setNestnode(Integer.parseInt(element.getAttribute("nestnode")));
+    		
+    		if (p.getNbnodes()<0 || p.getNestnode()<0)
+    		{
+    			throw(new Exception("Parametros Invalidos do Grafo "));
+    		}
+    		
     		NodeList weightsNode;
     		Node node;
     		int nodeidx=0,weight,neigh=0;
@@ -183,6 +199,10 @@ public class StochasticOptimProb implements OptProblem {
     				element = (Element)nodeCurr;
     				nodeidx = Integer.parseInt(element.getAttribute("nodeidx"));
     				
+    				if (nodeidx < 0)
+    				{
+    	    			throw(new Exception("Parametros Invalidos do xml"));
+    				}
 
     				b = p.Gr.addVertex(nodeidx);
     				
@@ -193,8 +213,16 @@ public class StochasticOptimProb implements OptProblem {
     					{
     						element = (Element)node;
     						neigh=Integer.parseInt(element.getAttribute("targetnode"));
+    						if (neigh <0)
+    						{
+    			    			throw(new Exception("Parametros Invalidos do xml"));
+    						}
     						b = p.Gr.addVertex(neigh);
     						weight = Integer.parseInt(element.getTextContent());
+    						if (weight<0)
+    						{
+    			    			throw(new Exception("Parametros Invalidos do xml"));
+    						}
     						b = p.Gr.addE(nodeidx, neigh, weight);
     						setwTotal(getwTotal() + weight);
     					}						
@@ -214,6 +242,10 @@ public class StochasticOptimProb implements OptProblem {
     							Double.parseDouble(element.getAttribute("alpha")),
     							Double.parseDouble(element.getAttribute("beta")),
     							Double.parseDouble(element.getAttribute("delta")));
+    		    		if (p.getAlpha()<0 || p.getBeta()<0 || p.getDelta()<0)
+    		    		{
+    		    			throw(new Exception("Parametro do Movimento invalido !"));
+    		    		}
     			
     				}
     				else if (nodeCurr.getNodeName()== "evaporation")
@@ -221,13 +253,21 @@ public class StochasticOptimProb implements OptProblem {
     					p.setEvapParam(
     							Double.parseDouble(element.getAttribute("eta")),
     							Double.parseDouble(element.getAttribute("rho")));
+    					if (p.getRho()<0 || p.getEtha()<0)
+    					{
+    						throw(new Exception("Parametro da Evaporacao invalido!"));
+    					}
     				}
     			}
     		}
+    		
+
     	}
     	catch(Exception ex)
     	{
+    		System.out.println("Simulador ira encerrar ....");
     		ex.printStackTrace();
+    		System.exit(1);
     	}
     }
 
