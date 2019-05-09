@@ -88,22 +88,26 @@ public class StochasticOptimProb implements OptProblem {
 			{
 				this.setActual_time(ev.getTime()); // Avanco rapido ate a hora de executa-lo
 				//System.out.println(actual_time);
-				if (ev.getClass() == Move.class)
+				//if (ev.getClass() == Move.class)
+				if(ev instanceof Move)
 				{
 					this.set_mevent(this.get_mevent()+1);
 					//System.out.println();
 					//System.out.println("mmevent = " + mevent);
 					
 				}
-				else if (ev.getClass() == Evaporation.class)
+				//else if (ev.getClass() == Evaporation.class)
+				else if( ev instanceof Evaporation)
 				{
 					this.set_eevent(this.get_eevent()+1);
 					//System.out.println(actual_time);
 					//System.out.println();
 					//System.out.println("eevent = "+ eevent);
 				}
-				else if(ev.getClass() == EventControlPrints.class)
+				//else if(ev.getClass() == EventControlPrints.class)
+				else if(ev instanceof EventControlPrints)
 				{
+					//DEBUG CODE
 					//System.out.println(Gr.getG().get(2));
 				}
 				ev.ExecutaEvent(this,this.Gr,hC);	
@@ -135,8 +139,6 @@ public class StochasticOptimProb implements OptProblem {
 			getPec().addElement(new EventControlPrints(ctrl_time*j+0.0000000001), Event.ec);
 		}
 		this.simulacao();
-		//System.out.println(hamcycle);
-		//System.out.println(Gr);
 
 	}
 	

@@ -19,7 +19,6 @@ import graph.graph;
 public class EventControlPrints extends Event {
 	/* ==== ATRIBUTOS ==== */
 	
-	private static final boolean DEBUG=false;
 	
 	/* ==== CONSTRUTORES ==== */	
 	/*********************************************************************************************
@@ -63,13 +62,8 @@ public class EventControlPrints extends Event {
         System.out.printf(formato2, "Number of evaporation events: ",op.get_eevent());
         System.out.println("\t\t");
         opt=op.findOpt();
-        if(!opt.getPath().isEmpty())
         System.out.print("Hamiltonian cycle: " + opt);
         
-        if(DEBUG==true) {
-	        if(op.getActual_time()>(double)400)
-	        System.out.println("Unique paths:\n" + op.hamcycle.size());
-        }
         /**
          * falta o caminho ....
          */
