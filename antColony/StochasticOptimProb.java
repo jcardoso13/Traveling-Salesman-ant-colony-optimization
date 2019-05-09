@@ -108,7 +108,11 @@ public class StochasticOptimProb implements OptProblem {
 					
 				}
 				//else if (ev.getClass() == Evaporation.class)
+<<<<<<< HEAD
 				else if(ev instanceof Evaporation)
+=======
+				else if( ev instanceof Evaporation)
+>>>>>>> master
 				{
 					this.set_eevent(this.get_eevent()+1);
 					//System.out.println(actual_time);
@@ -118,6 +122,7 @@ public class StochasticOptimProb implements OptProblem {
 				//else if(ev.getClass() == EventControlPrints.class)
 				else if(ev instanceof EventControlPrints)
 				{
+					//DEBUG CODE
 					//System.out.println(Gr.getG().get(2));
 				}
 				ev.ExecutaEvent(this,p.Gr,hC);	
@@ -155,9 +160,12 @@ public class StochasticOptimProb implements OptProblem {
 			getPec().addElement(new EventControlPrints(ctrl_time*j+0.0000000001), Event.ec); 
 		}
 		this.simulacao();
+<<<<<<< HEAD
 		 
 		//System.out.println(hamcycle);
 		//System.out.println(p.Gr);
+=======
+>>>>>>> master
 
 	}
 	

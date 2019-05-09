@@ -23,6 +23,10 @@ import graph.graph;
 public class EventControlPrints extends Event {
 	/* ==== ATRIBUTOS ==== */
 	
+<<<<<<< HEAD:discreteStochaticSim/EventControlPrints.java
+=======
+	
+>>>>>>> master:antColony/EventControlPrints.java
 	/* ==== CONSTRUTORES ==== */	
 	/*********************************************************************************************
 	 *  Este e o construtor.O que ele faz e chamar o construtor da super classe com 
@@ -66,7 +70,15 @@ public class EventControlPrints extends Event {
         System.out.printf(formato2, "Number of evaporation events: ",op.get_eevent());
         System.out.println("\t\t");
         opt=op.findOpt();
+<<<<<<< HEAD:discreteStochaticSim/EventControlPrints.java
         System.out.print(opt.getPath());
+=======
+        System.out.print("Hamiltonian cycle: " + opt);
+        
+        /**
+         * falta o caminho ....
+         */
+>>>>>>> master:antColony/EventControlPrints.java
         System.out.println();
 	}
 

@@ -28,7 +28,10 @@ public class HCResults {
 	 ************************************************/
 	public HCResults(LinkedList<Integer> p, int cT)
 	{
+		if(p!=null)
 		this.path =(LinkedList<Integer>)p.clone();
+		else
+		this.path=null;
 		this.costTotal =cT;
 	}
 	
