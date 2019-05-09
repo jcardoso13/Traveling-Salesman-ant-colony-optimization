@@ -18,7 +18,7 @@ classes: $(CLASSES:.java=.class)
 clean:
 	$(RM) ./antColony/*.class && $(RM) ./discreteStochaticSim/*.class && $(RM) ./graph/*.class && $(RM) ./main/*.class
 jar:
-	jar cfm simulator.jar manif.txt	./antColony/* ./discreteStochaticSim/* ./graph/* ./main/*
+	jar cfm simulator.jar MANIFEST.MF ./antColony/* ./discreteStochaticSim/* ./graph/* ./main/*
 
 run:
 	java -jar simulator.jar ./src/TESTS/$(TEST)
