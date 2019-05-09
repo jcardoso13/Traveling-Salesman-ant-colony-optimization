@@ -2,13 +2,30 @@ package antColony;
 
 import java.util.LinkedList;
 
+/**************************************************************************
+ * HCResults is the class that stores a newly found unique path
+ * 
+ * 
+ * 
+ * @author Grupo 11
+ *
+ *************************************************************************/
 
 public class HCResults {
 	
+	/** **/
 	LinkedList<Integer> path;
-	int costTotal;
+	/** **/
+	public int costTotal;
 
 	@SuppressWarnings("unchecked")
+	/*************************************************
+	 * 
+	 * Copies the ant's path and total cost to this instance
+	 * 
+	 * @param p
+	 * @param cT
+	 ************************************************/
 	public HCResults(LinkedList<Integer> p, int cT)
 	{
 		if(p!=null)
@@ -18,13 +35,22 @@ public class HCResults {
 		this.costTotal =cT;
 	}
 	
+	/************************************************
+	 * 
+	 * @return 
+	 ***********************************************/
 	public String toString()
 	{
 		return "Path: " +path +"\n"+ "Cost:\n"+costTotal+ "\n";
 	}
 	
-
-	@Override
+	
+	/****************************************************
+	 * 
+	 * 
+	 * hashCode method for equals
+	 * 
+	 ***************************************************/
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -33,15 +59,30 @@ public class HCResults {
 		return result;
 	}
 
+	/**************************************************
+	 * 
+	 * Returns the path
+	 * 
+	 * @return
+	 **************************************************/
 	public LinkedList<Integer> getPath() {
 		return path;
 	}
 
+	/**************************************************
+	 * Returns the total cost
+	 * @return
+	 *
+	 **************************************************/
 	public int getCostTotal() {
 		return costTotal;
 	}
 
-	@Override
+	/***************************************************
+	 * 
+	 * Equals method to check if it's unique or not
+	 * 
+	 **************************************************/
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

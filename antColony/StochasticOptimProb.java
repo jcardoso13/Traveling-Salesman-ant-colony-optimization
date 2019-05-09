@@ -12,16 +12,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import discreteStochaticSim.Evaporation;
 import discreteStochaticSim.Event;
+import discreteStochaticSim.EventControlPrints;
 import discreteStochaticSim.InterfacePec;
+import discreteStochaticSim.Move;
 import discreteStochaticSim.PriorityQueuePec;
-import graph.graph;
 
 
 /**************************************************************************************************************
- *  Classe da Otimizacao do Problema
- *  E importante salientar que existem 4 atributos que nao sao estaticos:relacionados com o tempo, grafo, 
- *  evento, formiga.
+ *  Classe da Otimizacao do Problema.E importante salientar que existem 4 atributos que nao sao estaticos:
+ *  relacionados com o tempo, grafo, evento, formiga.
  *  
  * @author Grupo 11
  *
@@ -30,37 +31,39 @@ import graph.graph;
 public class StochasticOptimProb implements OptProblem {
 	
 	/* =========== ATRIBUTOS ============ */
+	/** parametros armazenados sobre o problema a resolver **/
+	public Parameters p;
 	
 	/*1.parametros relacionados com o tempo*/
+	/** tempo de controlo que corresponde ao quociente entre o instante final e 20 **/
 	private double ctrl_time; 
-	private double finalinst;
-	private double actual_time;
 	
 	/*2.parametros relacionados com evento*/
-	private double alpha;
-	private double beta;
-	private double delta;
-	private double eta;
-	private double rho;
+	/** numero de observacoes que irao ser imprimidas **/
 	private int numControlPrint ;
+	/** numero de eventos de movimento **/
 	private int mevent = 0 ;
+	/**numero de eventos de evaporacao **/
 	private int eevent = 0;
+	/** Interface relativa a PEC **/
 	private InterfacePec<Event> pec;
+	/** numero de Controlo para imprimir as observacoes **/
+	private static int numero_controlo = 20;
 	
 	/*3.parametros relacionados com formiga*/
+	/** Lista das Formigas  **/
 	private final List<Ant> list_ants;
-	private double plevel;
-	private int antcolsize;//total;
-	LinkedList <HCResults> hamcycle = new LinkedList<HCResults>();
+	/** Lista ligada dos ciclos hamiltonianos */
+	public LinkedList <HCResults> hamcycle = new LinkedList<HCResults>();
+	/** Ciclo hamiltoniano **/
 	HamiltonianCycle<Integer,Integer> hC;
 	
 	/*4. parametros relacionados com o grafo*/
-	private graph<Integer,Integer> Gr = new graph<Integer,Integer>();
-	private int nbnodes;
-	private int nestnode;
+	/** Peso total considerando todas as arestas **/
 	private int wTotal=0;
+	/** Booleano de controlo dos dados obtidos pelo grafo **/
 	boolean b;
-	
+
 
 	/* =========== CONSTRUTOR ============ */
     /************************************************************
@@ -70,23 +73,31 @@ public class StochasticOptimProb implements OptProblem {
 	public StochasticOptimProb() 
 	{
 		setPec(new PriorityQueuePec<Event>(Event.ec));
+		p = new Parameters();
 		list_ants = new LinkedList<Ant>();
 	}
 
-	
+	/* ========= METODOS ============= */
+	/************************************************************
+	 * Metodo que simula o movimento das formigas pelo grafo para
+	 * encontrar o ciclo hamiltoniano e regressam ao no inicial.
+	 * E voltam a percorrer novamente o grafo para encontrar um novo 
+	 * ciclo hamiltoniano, tudo isto tendo em conta a evaporacao das
+	 * feromonas nas arestas.
+	 ***********************************************************/
 	public void simulacao() {
 		
 		Event ev;
 		//Event aux;
 		/* ========================= SIMULACAO ===========================*/
-		while (this.getActual_time()<=this.finalinst)
+		while (p.getActual_time()<=p.getFinalinst())
 		{
 			ev = this.getPec().getFirstElement(); // passa para o proximo evento do PEC
 			//System.out.println(ev);
 			
 			if(ev != null)
 			{
-				this.setActual_time(ev.getTime()); // Avanco rapido ate a hora de executa-lo
+				p.setActual_time(ev.getTime()); // Avanco rapido ate a hora de executa-lo
 				//System.out.println(actual_time);
 				//if (ev.getClass() == Move.class)
 				if(ev instanceof Move)
@@ -97,7 +108,11 @@ public class StochasticOptimProb implements OptProblem {
 					
 				}
 				//else if (ev.getClass() == Evaporation.class)
+<<<<<<< HEAD
+				else if(ev instanceof Evaporation)
+=======
 				else if( ev instanceof Evaporation)
+>>>>>>> master
 				{
 					this.set_eevent(this.get_eevent()+1);
 					//System.out.println(actual_time);
@@ -110,54 +125,82 @@ public class StochasticOptimProb implements OptProblem {
 					//DEBUG CODE
 					//System.out.println(Gr.getG().get(2));
 				}
-				ev.ExecutaEvent(this,this.Gr,hC);	
+				ev.ExecutaEvent(this,p.Gr,hC);	
 				
 			}
 			else break;
 
+
 		}
 		
 	}
-
 	
+	/******************************************************************************************************
+	 * Este metodo e todo o problema num.Ele deve abrir o arquivo especificado nos argumentos, 
+	 * analisa-lo adequadamente, inicializar o problema de otimizacao e, em seguida, chamar o metodo
+	 * de simulacao.
+	 * 
+	 * @param filename e o nome do arquivo que contem o teste.
+	 ******************************************************************************************************/
 	public void runOptimizationProb(String filename) {
 		readXML(filename);
-		hC = new HamiltonianCycle<Integer,Integer>(alpha,beta,Gr);
-		setActual_time(0);
-		ctrl_time = finalinst/20;
+		hC = new HamiltonianCycle<Integer,Integer>(p.getAlpha(),p.getBeta(),p.Gr);
+		p.setActual_time(0); ctrl_time = p.getFinalinst()/numero_controlo;
+		  
+		//Adiciona as impressoes do controlo de Evento ao PEC 
+		for (int i = 0; i < p.getAntcolsize(); i++) 
+		{ 
+			Ant a = new Ant(p.getNestnode());
+			getList_ants().add(a); getPec().addElement(new Move(0,a),Event.ec);
+		  
+		} 
 		
-		//Adiciona as impressoes do controlo de Evento ao PEC
-		for (int i = 0; i < antcolsize; i++)
+		for (int j = 0; j <= numero_controlo; j++ ) 
 		{
-			Ant a = new Ant(nestnode);
-			getList_ants().add(a);
-			getPec().addElement(new Move(0,a),Event.ec);
-			
-		}
-		for (int j = 0; j <= 20; j++ )
-		{
-			getPec().addElement(new EventControlPrints(ctrl_time*j+0.0000000001), Event.ec);
+			getPec().addElement(new EventControlPrints(ctrl_time*j+0.0000000001), Event.ec); 
 		}
 		this.simulacao();
+<<<<<<< HEAD
+		 
+		//System.out.println(hamcycle);
+		//System.out.println(p.Gr);
+=======
+>>>>>>> master
 
 	}
 	
 	
-	
-    private void readXML(String filename) 
+	/****************************************************************
+	 * Metodo para leitura de um ficheiro XML recorrendo Document Object Model
+	 * que cria uma arvore que representa todo o documento.
+	 * 
+	 * @param filename -- ficheiro de teste, test_i, com i =1,...5
+	 * 
+	 ****************************************************************/
+	 
+	private void readXML(String filename) 
     {
     	try
     	{
     		DocumentBuilder docBuild = DocumentBuilderFactory.newInstance().newDocumentBuilder();
     		Document d = docBuild.parse("."+filename);
-    		d.getDocumentElement().normalize();
-    		
+    		d.getDocumentElement().normalize();  		
     		Node root = d.getDocumentElement();
     		Element element;
     		element = (Element)root;
-    		finalinst = Double.parseDouble(element.getAttribute("finalinst"));
-    		setPlevel(Double.parseDouble(element.getAttribute("plevel")));
-    		setAntcolsize(Integer.parseInt(element.getAttribute("antcolsize")));
+    		p.setFinalinst(Double.parseDouble(element.getAttribute("finalinst")));
+    		p.setPlevel(Double.parseDouble(element.getAttribute("plevel")));
+    		p.setAntcolsize(Integer.parseInt(element.getAttribute("antcolsize")));
+    		
+    		if (p.getFinalinst()<0)
+    		{
+    			throw(new Exception("Parametro invalido FinalInst"));
+    		}
+    		
+    		if (p.getAntcolsize()<0)
+    		{
+    			throw(new Exception("Parametro invalido da dimensao da colonia de formigas"));
+    		}
     		
     		NodeList childNodes = root.getChildNodes();
     		NodeList nodesOfGraph = null, eventList=null;
@@ -180,12 +223,17 @@ public class StochasticOptimProb implements OptProblem {
     			}
     		}
     		element = (Element)graph;
-    		setNbnodes(Integer.parseInt(element.getAttribute("nbnodes")));
-    		setNestnode(Integer.parseInt(element.getAttribute("nestnode")));
+    		p.setNbnodes(Integer.parseInt(element.getAttribute("nbnodes")));
+    		p.setNestnode(Integer.parseInt(element.getAttribute("nestnode")));
+    		
+    		if (p.getNbnodes()<0 || p.getNestnode()<0)
+    		{
+    			throw(new Exception("Parametros Invalidos do Grafo "));
+    		}
+    		
     		NodeList weightsNode;
     		Node node;
     		int nodeidx=0,weight,neigh=0;
-    		/* Construction of the graph*/
     		for (int i=0; i<nodesOfGraph.getLength();i++)
     		{
     			nodeCurr = nodesOfGraph.item(i);
@@ -194,7 +242,13 @@ public class StochasticOptimProb implements OptProblem {
     				weightsNode = nodeCurr.getChildNodes();
     				element = (Element)nodeCurr;
     				nodeidx = Integer.parseInt(element.getAttribute("nodeidx"));
-    				b = Gr.addVertex(nodeidx);
+    				
+    				if (nodeidx < 0)
+    				{
+    	    			throw(new Exception("Parametros Invalidos do xml"));
+    				}
+
+    				b = p.Gr.addVertex(nodeidx);
     				
     				for (int m=0; m <weightsNode.getLength();m++)
     				{
@@ -203,9 +257,17 @@ public class StochasticOptimProb implements OptProblem {
     					{
     						element = (Element)node;
     						neigh=Integer.parseInt(element.getAttribute("targetnode"));
-    						b = Gr.addVertex(neigh);
+    						if (neigh <0)
+    						{
+    			    			throw(new Exception("Parametros Invalidos do xml"));
+    						}
+    						b = p.Gr.addVertex(neigh);
     						weight = Integer.parseInt(element.getTextContent());
-    						b = Gr.addE(nodeidx, neigh, weight);
+    						if (weight<0)
+    						{
+    			    			throw(new Exception("Parametros Invalidos do xml"));
+    						}
+    						b = p.Gr.addE(nodeidx, neigh, weight);
     						setwTotal(getwTotal() + weight);
     					}						
     				}
@@ -220,156 +282,44 @@ public class StochasticOptimProb implements OptProblem {
     				element = (Element)nodeCurr;
     				if (nodeCurr.getNodeName()=="move")
     				{
-    					setMoveParam(
+    					p.setMoveParam(
     							Double.parseDouble(element.getAttribute("alpha")),
     							Double.parseDouble(element.getAttribute("beta")),
     							Double.parseDouble(element.getAttribute("delta")));
+    		    		if (p.getAlpha()<0 || p.getBeta()<0 || p.getDelta()<0)
+    		    		{
+    		    			throw(new Exception("Parametro do Movimento invalido !"));
+    		    		}
     			
     				}
     				else if (nodeCurr.getNodeName()== "evaporation")
     				{
-    					setEvapParam(
+    					p.setEvapParam(
     							Double.parseDouble(element.getAttribute("eta")),
     							Double.parseDouble(element.getAttribute("rho")));
+    					if (p.getRho()<0 || p.getEtha()<0)
+    					{
+    						throw(new Exception("Parametro da Evaporacao invalido!"));
+    					}
     				}
     			}
     		}
+    		
+
     	}
     	catch(Exception ex)
     	{
+    		System.out.println("Simulador ira encerrar ....");
     		ex.printStackTrace();
+    		System.exit(1);
     	}
     }
-    public void setMoveParam(double a, double b,double d) 
-    {
-    	alpha = a;
-    	beta = b;
-    	delta=d;
-    }
-    public double getAlpha() 
-    {
-    	return alpha;
-    }
-    public double getBeta() 
-    {
-    	return beta;
-    }  
-    public double getDelta() 
-    {
-    	return delta;
-    }   
-    public void setEvapParam(double e, double r) 
-    {
-    	eta=e;
-    	rho=r;
-    }
-    public double getEtha() 
-    {
-    	return eta;
-    }
-    public double getRho() 
-    {
-    	return rho;
-    }
-    /** @return the numControlPrint */
-    public int getNumControlPrint() 
-    {
-        return numControlPrint;
-    }
-    /** @param numControlPrint armazenamento desta variavel*/
-    public void setNumControlPrint(int numCP) 
-    {
-        numControlPrint = numCP;
-    }
-    /** @return o actual_time */
-    public double getActual_time() 
-    {
-        return actual_time;
-    }
-    /** @param actual_time -- armazenamento do tempo atual */
-    public void setActual_time(double aT) 
-    {
-        actual_time = aT;
-    }
-    /** @param mevent -- armazenado o numero de move events */
-    public void set_mevent(int mev)
-    {
-    	mevent = mev;
-    }  
-    /** @return o mmevent */
-    public int get_mevent()
-    {
-    	return mevent;
-    }
-    /** @param eevent -- armazenado o numero de eventos de evaporacao */
-    public void set_eevent(int eev)
-    {
-    	eevent = eev;
-    }  
-    /** @return o eevent -- numero de eventos evaporacao */
-    public int get_eevent()
-    {
-    	return eevent;
-    }    
-    /** @return the pec */
-    public InterfacePec<Event> getPec() 
-    {
-        return pec;
-    }
-    /** @param pec the pec to set */
-    public void setPec(InterfacePec<Event> p) 
-    {
-        pec = p;
-    }
-	/** @return o numero total de nos*/
-    public int getNbnodes() 
-    {
-		return nbnodes;
-	}
-    /** @param nbnodes -- armazena o numero total de nos **/
-	public void setNbnodes(int totalnode) 
-	{
-		nbnodes = totalnode;
-	}
-	/** @return o nestnode  **/
-	public int getNestnode() 
-	{
-		return nestnode;
-	}
-	/** @param nnode --- armazena o nestnode **/
-	public void setNestnode(int nnode) 
-	{
-		nestnode = nnode;
-	}
-	public double getPlevel() 
-	{
-		return plevel;
-	}
-	public void setPlevel(double pL) 
-	{
-		plevel = pL;
-	}
-	public int getAntcolsize() 
-	{
-		return antcolsize;
-	}
-	public void setAntcolsize(int antsize)
-	{
-		antcolsize = antsize;
-	}
-	public List<Ant> getList_ants() 
-	{
-		return list_ants;
-	}
-	public int getwTotal() 
-	{
-		return wTotal;
-	}
-	public void setwTotal(int wT) 
-	{
-		wTotal = wT;
-	}
-	
+
+	/***********************************************************
+	 * 
+	 * @return
+	 * 
+	 **********************************************************/
 	public HCResults findOpt()
 	{
 	Iterator<HCResults> it= hamcycle.iterator();
@@ -386,7 +336,102 @@ public class StochasticOptimProb implements OptProblem {
 		}
 	}
 	return ret;
+	}	
+	
+    /****************************************************************************
+     * Getter do numero de observacoes que irao ser imprimidas
+     * @return numControlPrint - numero de observacoes que irao ser imprimidas
+     **************************************************************************/
+    public int getNumControlPrint() 
+    {
+        return numControlPrint;
+    }
+    /***************************************************************
+     * Armazenamento do numero de observacoes que estao a ser imprimidas
+     * @param numCP - numero de observacoes impressas
+     **************************************************************/
+    public void setNumControlPrint(int numCP) 
+    {
+        numControlPrint = numCP;
+    }
+
+    /***************************************************************
+     * Armazenamento do numero de eventos move
+     *  @param mev -- numero de move events 
+     **************************************************************/
+    public void set_mevent(int mev)
+    {
+    	mevent = mev;
+    }  
+    /**************************************************************
+     * Getter do numero de eventos move
+     * 
+     * @return mmevent  -- numero de move events
+     **************************************************************/
+    public int get_mevent()
+    {
+    	return mevent;
+    }
+    /**************************************************************
+     * Armazeno do numero de eventos de evaporacao 
+     * @param eev -- numero de eventos de evaporacao 
+     *************************************************************/
+    public void set_eevent(int eev)
+    {
+    	eevent = eev;
+    }  
+    /************************************************************
+     *  Getter do numero de eventos evaporacao
+     *  @return o eevent -- numero de eventos evaporacao
+     ***********************************************************/
+    public int get_eevent()
+    {
+    	return eevent;
+    }    
+    /***********************************************************
+     * Getter of pending event container
+     * @return pec - pending event container
+     ***********************************************************/
+    public InterfacePec<Event> getPec() 
+    {
+        return pec;
+    }
+    /***********************************************************
+     * Setter of pending event container
+     * @param p -- pending event container
+     ***********************************************************/
+    public void setPec(InterfacePec<Event> p) 
+    {
+        pec = p;
+    }
+    
+    /**********************************************************
+     * Getter da Lista de Formigas existentes
+     * @return list_ants - lista de formigas existentes no problema
+     *********************************************************/
+	public List<Ant> getList_ants() 
+	{
+		return list_ants;
 	}
+	/*********************************************************
+	 * Getter do peso total tendo em conta todas as arestas
+	 * 
+	 * @return wTotal - peso total do grafo para posteriores
+	 * 					calculos
+	 *********************************************************/
+	public int getwTotal() 
+	{
+		return wTotal;
+	}
+	/*********************************************************
+	 * Armazenamento do peso total considerando todas as arestas
+	 * @param wT - peso total do grafo para posteriores calculos
+	 ********************************************************/
+	public void setwTotal(int wT) 
+	{
+		wTotal = wT;
+	}
+	
 
 
 }

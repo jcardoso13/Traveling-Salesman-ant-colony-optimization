@@ -2,15 +2,38 @@ package graph;
 
 import java.util.ArrayList;
 
+/***********************************************************
+ * 
+ * @author Grupo 11
+ *
+ * @param <T>
+ * @param <E>
+ * 
+ ***********************************************************/
 public class Vertex<T,E>{
 
+	/* ==== ATRIBUTOS ==== */
+	/** **/
 	private T label;
+	/** **/
 	private ArrayList<Edge<T,E>> e;
+	
+	/* ==== CONSTRUTOR ==== */
+	/********************************************************
+	 * 
+	 * @param label
+	 ********************************************************/
 	public Vertex(T label) {
 		this.e= new ArrayList<Edge<T,E>>();
 		this.label=label;
 	}
 	
+	/* ==== METODOS ==== */
+	/********************************************************
+	 * 
+	 * @param label
+	 * @param weight
+	 ********************************************************/
 	void addE(T label, E weight)
 	{
 		Edge<T,E> e=new Edge<T,E>(label,weight);
@@ -19,18 +42,33 @@ public class Vertex<T,E>{
 	
 	
 	// Getter do Nome da Node, (diferente da posicao no vetor!)
+	/***********************************************************
+	 * Getter do Nome da Node
+	 * NOTA= Nao e o mesmo que a posicao no vetor!)
+	 * @return
+	 ***********************************************************/
 	public T getLabel() {
 		return  label;
 	}
 
 	
-	//Getter do Array de Arestas, Para o trabalho, itera-se de 1 a N sendo N o numero de arestas
-	// Para referencia, ler sobre Iteradores (ou ver o codigo de GetV em graph.java)
+	/***********************************************************
+	 * Getter do Array de Arestas, Para o trabalho, itera-se de 1 a N
+	 * sendo N o numero de arestas
+	 * Para referencia, ler sobre Iteradores (ou ver o codigo de GetV 
+	 * em graph.java)
+	 * 
+	 * @return
+	 **********************************************************/
 	public ArrayList<Edge<T, E>> getE() {
 		return e;
 	}
 
-	// Retira uma Edge da Node, nao e preciso usar para o projeto
+	/*********************************************************
+	 * Retira uma Edge da Node, nao e preciso usar para o projeto
+	 * 
+	 * @param label
+	 *********************************************************/
 	void removeE(T label)
 	{
 		this.e.remove(label);
@@ -38,6 +76,9 @@ public class Vertex<T,E>{
 	
 	
 	// Para Println
+	/*********************************************************
+	 * 
+	 ********************************************************/
 	public String toString() {
 		return "\n Label:" + this.label + " \n Edges: \n" + this.e.toString() + "\n"; 
 	}

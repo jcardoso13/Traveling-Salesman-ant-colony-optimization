@@ -5,11 +5,9 @@ import java.util.LinkedList;
 
 
 /***********************************************************************************************
- * Esta e a classe para as formigas
- * 
- * Cada formiga deve ter associada a si um caminho (path), o total do custo do seu caminho 
- * e um booleano designado por hit para indicar se cada formiga atingiu a meta.
- * Um agente mantem uma listas: - uma lista de historico para acompanhar o caminho que cobriu 
+ * Esta e a classe para as formigas.Cada formiga deve ter associada a si um caminho (path), o total 
+ * do custo do seu caminho.
+ * Um agente mantem uma lista: - uma lista de historico para acompanhar o caminho que cobriu 
  * ate agora;
  * @author Grupo 11
  *
@@ -18,46 +16,51 @@ import java.util.LinkedList;
 public class Ant {
 	
 	/* ===== ATRIBUTOS ===== */
-	//LinkedList<Integer> path;
-	//LinkedList<Integer> cost ;
+	
+	/*****************************************************************
+	 * Lista ligada do caminho da formiga tendo em conta os custos.
+	 ****************************************************************/
 	private LinkedList<pathw> p;
-	private boolean hit;
+
 	
 	/* ===== CONSTRUTOR ===== */
+	/***************************************************************
+	 * Construtor cujo objetivo e criar um objeto formiga com o seu
+	 * caminho a comecar no nestnode -- ponto de partida.
+	 * 
+	 * @param nest Ponto de Partida no grafo
+	 **************************************************************/
 	public Ant(int nest)
 	{
 		pathw aux= new pathw(nest,0);
-		//cost = new LinkedList<Integer>();
-		//path = new LinkedList<Integer>();
 		p= new LinkedList<pathw>();
-		setHit(false);
 		p.add(aux);
 	}
 	
 	
 	/* ===== METODOS ==== */
-	/** @param hit -- armazena o hit **/
-	public void setHit(boolean h) 
-	{
-		hit = h;
-	}
-	/** @return hit **/
-	public boolean getHit()
-	{
-		return hit;
-	}
-	/** @param path -- armazena o caminho **/
-	
-	void setP(LinkedList<pathw> path)
-	{
-		p=path;
-	}
-	public LinkedList<pathw> getP()
-	{
+	/**********************************************
+	 * Getter do caminho da formiga pelo grafo
+	 * ja considerando os custos.
+	 * @return p - path (caminho) da formiga 
+	 **********************************************/
+	public LinkedList<pathw> getP() {
 		return p;
 	}
+
+	/********************************************
+	 * Armazenamento (setter) do caminho da formiga
+	 * @param path -  path (caminho) da formiga
+	 ********************************************/
+	public void setP(LinkedList<pathw> path) {
+		p = path;
+	}
 	
-	
+	/*********************************************
+	 * Getter do caminho da formiga pelo grafo
+	 * Usado para imprimir o caminho no fim.
+	 * @return n - path (caminho) da formiga
+	 ********************************************/
 	public LinkedList<Integer> getPath()
 	{
 		Iterator<pathw> it= p.iterator();
@@ -68,6 +71,12 @@ public class Ant {
 		}
 		return n;
 	}
+	
+	/**********************************************
+	 * Getter do custo do caminho da formiga.
+	 * 
+	 * @return n - custo do caminho da formiga
+	 **********************************************/
 	public LinkedList<Integer> getCost()
 	{
 		Iterator<pathw> it= p.iterator();
@@ -79,9 +88,17 @@ public class Ant {
 		return n;
 	}
 	
+	
+	/*********************************************
+	 * 
+	 * @return o caminho da formiga como string
+	 * para ser impresso.
+	 *********************************************/
 	public String toString()
 	{
 		return p.toString();
 	}
+	
+
 
 }

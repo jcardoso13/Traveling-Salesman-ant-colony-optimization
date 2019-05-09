@@ -6,13 +6,27 @@ import antColony.Ant;
 import antColony.HamiltonianCycle;
 import antColony.OptProblem;
 import graph.graph;
-
+/***************************************************************
+ * Classe Abstrata para os Eventos
+ * 
+ * @author Grupo 11
+ *
+ *<p> Classe Abstrata para Eventos. Tem um campo para a formiga 
+ *associada e outro para o tempo em que devemos executar o evento.
+ *Existem 2 campos estaticos. O primeiro e um objeto aleatorio para 
+ *gerar numeros aleatorios e o outro e um comparador de eventos que 
+ *e usado quando queremos adicionar eventos ao PEC. Os metodos 
+ *Execute Event e toString devem ser substituidos.
+ ****************************************************************/
 public abstract class Event implements InterfaceEvent {
 	/* ==== ATRIBUTOS ==== */
-	private double time_stamp;
-	private final Ant ant;
-
-	public static Random r = new Random();
+	/** tempo em que devemos executar o evento **/
+	protected double time_stamp;
+	/** formiga em que devemos executar o evento  **/
+	protected final Ant ant;
+	/** numero aleatorio gerado **/
+	private static Random r = new Random();
+	/** comparador de eventos **/
 	public static EventComparator ec = new EventComparator();
 
 	/* ==== CONSTRUTORES ==== */
@@ -31,22 +45,17 @@ public abstract class Event implements InterfaceEvent {
 		ant=a;
 	}
 
-	/* ==== METODOS ==== */
-	
-	
+	/* ==== METODOS ==== */	
 	/*****************************************************************************
 	 * Metodo abstrato da execucao do evento. Cada tipo de evento deve redefinir este 
 	 * metodo para fazer o que deve fazer.
 	 * 
-	 * @param op e o problema de optmizacao a que este evento pertence
+	 * @param opp e o problema de optmizacao a que este evento pertence
+	 * @param gr -- grafo do problema a optimizar
+	 * @param hc -- ciclo hamiltoniano
 	 *****************************************************************************/
 	public abstract void ExecutaEvent(OptProblem opp,graph<Integer,Integer> gr,HamiltonianCycle<Integer,Integer> hc);
 	
-	
-	/*****************************************************************************
-	 * toString metodo que substitui aquele com o mesmo nome na superclasse Object.
-	 ****************************************************************************/
-	public abstract String toString();
 	
 	/**********************************************************************************
 	 * Metodo que retorna um numero aleatorio de acordo com um exponencial com media m. 
@@ -63,17 +72,27 @@ public abstract class Event implements InterfaceEvent {
 	}
 
 	
-	/** @return a formiga **/
+	/*********************************************************
+	 *  Getter da Formiga associada ao evento
+	 *  @return ant - uma certa formiga associada a um evento
+	 ********************************************************/
 	public Ant getAnt()
 	{
 		return ant;
 	}
-	/** @return o tempo **/
+	/********************************************************
+	 *	Getter de o tempo considerando um certo evento
+	 * @return time_stamp 
+	 * 
+	 ********************************************************/
     public double getTime() 
     {
     	return time_stamp;
     }
-    /** @param tempo ira ser armazenado **/
+    /********************************************************
+     * Armazenar o tempo
+     * @param ts ira ser armazenado 
+     *******************************************************/
     public void setTime(double ts) 
     {
     	time_stamp = ts;

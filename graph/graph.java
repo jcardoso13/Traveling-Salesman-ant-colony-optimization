@@ -1,19 +1,39 @@
 package graph;
 
-
 import java.util.*;
 
+/******************************************************
+ * 
+ * @author Grupo 11
+ *
+ *
+ * @param <T>
+ * @param <E>
+ * 
+ * 
+ ******************************************************/
 public class graph<T,E> implements GraphInterface<T,E>{
 	
+	/* ==== ATRIBUTOS ==== */
+	/** **/
 	private ArrayList<Vertex<T,E>> g;
 	
 	
 	//Getter do Vetor de Nodes
+	/***********************************************************
+	 * 
+	 * @return g
+	 **********************************************************/
 	public ArrayList<Vertex<T, E>> getG() {
 		return g;
 	}
 
 	//Getter do Node na posicao -Position- do vetor
+	/***********************************************************
+	 * 
+	 * @param label
+	 * @return 
+	 ***********************************************************/
 	public Vertex<T,E> GetVertex(T label) {
 		int x;
 		Vertex<T,E> v1= new Vertex<T,E>(label);
@@ -21,6 +41,11 @@ public class graph<T,E> implements GraphInterface<T,E>{
 		return g.get(x);
 	}
 	
+	/**********************************************************
+	 * 
+	 * @param label
+	 * @return 
+	 *********************************************************/
 	public ArrayList<Edge<T,E>>GetEdgeVector(T label){
 		int x;
 		Vertex<T,E> v1= new Vertex<T,E>(label);
@@ -30,6 +55,10 @@ public class graph<T,E> implements GraphInterface<T,E>{
 	}
 
 	// Cria o grafo com um List Array Vazio
+	/***********************************************************
+	 * 
+	 * 
+	 **********************************************************/
 	public graph() {
 		this.g = new ArrayList<Vertex<T,E>>();
 	}
@@ -37,7 +66,11 @@ public class graph<T,E> implements GraphInterface<T,E>{
 	
 	// if success return true, else fail
 	// Adiciona um vertice ao grafo com lista de adjacencias vazia
-	
+	/**************************************************************
+	 * 
+	 * @param label
+	 * @return 
+	 *************************************************************/
 	public boolean addVertex(T label) {
 		Vertex<T,E> v= new Vertex<T,E>(label);
 		if (this.g.contains(v)==false) // se o grafo ainda nao tiver este Node
@@ -52,6 +85,11 @@ public class graph<T,E> implements GraphInterface<T,E>{
 	//return true if success, else fail
 	//Retira um vertice do grafo, nao e preciso para o nosso proj
 	
+	/*************************************************************
+	 * 
+	 * @param label
+	 * @return
+	 *************************************************************/
 	public boolean removeVertex(T label) {
 		Vertex<T,E> v= new Vertex<T,E>(label);
 		boolean b=this.g.remove(v);
@@ -60,6 +98,14 @@ public class graph<T,E> implements GraphInterface<T,E>{
 	
 	
 	/* Adiciona uma Aresta entre 2 nodes */
+	/***********************************************************
+	 * 
+	 * @param label1
+	 * @param label2
+	 * @param weight
+	 * 
+	 * @return 
+	 **********************************************************/
 	public boolean addE(T label1,T label2, E weight) {
 		Vertex<T,E> v1= new Vertex<T,E>(label1);
 		Vertex<T,E> v2= new Vertex<T,E>(label2);
@@ -82,6 +128,13 @@ public class graph<T,E> implements GraphInterface<T,E>{
 	
 	
 	/* Remove uma Aresta entre dois Nodes*/
+	/***********************************************************
+	 * 
+	 * 
+	 * @param label1
+	 * @param label2
+	 * @return
+	 **********************************************************/
 	public boolean removeE(T label1,T label2) {
 		Vertex<T,E> v1= new Vertex<T,E>(label1);
 		Vertex<T,E> v2= new Vertex<T,E>(label2);
@@ -106,6 +159,11 @@ public class graph<T,E> implements GraphInterface<T,E>{
 	
 	
 	/*Com apenas um Label, encontra o Node e retorna a sua posicao no Vetor */
+	/*************************************************************
+	 * 
+	 * @param v
+	 * @return
+	 ************************************************************/
 	int getV(Vertex<T,E> v)
 	{
 		Iterator<Vertex<T,E>> it=this.g.iterator();
@@ -132,18 +190,19 @@ public class graph<T,E> implements GraphInterface<T,E>{
 	public String toString() {
 		return this.g.toString(); 
 	}
-	/***
+	/***********************************************************
 	 * 
 	 * @param label1
 	 * @param label2
 	 * @return
-	 */
+	 ***********************************************************/
 	public Edge<T,E> FindE(T label1,T label2)
 	{
 		Vertex<T,E> v1= new Vertex<T,E>(label1);
 		Vertex<T,E> v2= new Vertex<T,E>(label2);
 		Iterator<Edge<T,E>> e;
 		Edge<T,E> ed;
+		@SuppressWarnings("unchecked")
 		Edge<T,E> error= (Edge<T, E>) new Edge<Integer,Integer>(0,0);
 		Vertex<T,E> v3;
 		int x;
