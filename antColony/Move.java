@@ -83,7 +83,8 @@ public class Move extends Event {
 				if(label==op.p.getNestnode())
 				{
 					w=Ed.getWeight();
-					ant.getP().add(new pathw(op.p.getNestnode(),w));
+					//ant.getP().add(new pathw(op.p.getNestnode(),w));
+					ant.getP().get(0).setCost(w);
 				}
 				
 			}

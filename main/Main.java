@@ -40,7 +40,6 @@ public class Main {
 		/* 2 - Criacao de uma nova otimizacao do problema  */
 		OptProblem opt = new StochasticOptimProb();
 		
-		System.out.println(args[0]);
 		/* 3 - Execucao do referido problema de otimizacao. A analise, inicializacao e execucao sao feitos */
 		opt.runOptimizationProb(args[0]);
 	
