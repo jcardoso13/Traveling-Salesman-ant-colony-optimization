@@ -24,6 +24,8 @@ Etha is the time between evaporation events
 
 Rho is the ammount of decay of the pheromones
 
+P level is a constant that multiplies by (Total weight of the graph / cost of this specific path)
+
 the XML has all the inputs of the project, including the graph and it's weights.
 
 
